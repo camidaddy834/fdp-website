@@ -1,17 +1,194 @@
 ---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { VERTICAL_META, SITE } from "../data/site";
+import { VERTICALS } from "../content.config";
 
+const projects = (await getCollection("projects")).filter((p) => !p.data.draft);
+const featured = projects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  description="FDP plans and designs high-performing foodservice facilities across higher education, corporate, healthcare, casinos, culinary, and K-12."
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">Foodservice Facility Design &amp; Consulting</p>
+      <h1 class="hero-title">
+        We design the kitchens<br />behind the experience.
+      </h1>
+      <p class="hero-lede">
+        From campus dining commons to 24-hour casino floors, FDP plans
+        foodservice facilities that move more covers, run leaner, and last
+        longer — engineered around your menu, your volume, and your building.
+      </p>
+      <div class="hero-actions">
+        <a href="/portfolio" class="btn btn-primary">See our work</a>
+        <a href="/contact" class="btn btn-ghost">Request a proposal</a>
+      </div>
+    </div>
+    <div class="hero-glow" aria-hidden="true"></div>
+  </section>
+
+  <!-- Stat band -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat">
+        <span class="stat-num tabular">6</span>
+        <span class="stat-label">Industry sectors served</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num tabular">2</span>
+        <span class="stat-label">Texas offices — Dallas &amp; Houston</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num tabular">30+</span>
+        <span class="stat-label">Years designing foodservice</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num tabular">1M+</span>
+        <span class="stat-label">Sq ft planned &amp; specified</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verticals -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">What we design</p>
+          <h2 class="sec-title">Six sectors, one discipline</h2>
+        </div>
+        <p class="sec-note">
+          Every project runs on the same rigor — master planning, foodservice
+          design, and equipment specification — tuned to the demands of each
+          environment.
+        </p>
+      </div>
+      <div class="verticals">
+        {
+          VERTICALS.map((slug, i) => (
+            <a href={`/portfolio/${slug}/`} class="vert">
+              <span class="vert-idx tabular">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 class="vert-label">{VERTICAL_META[slug].label}</h3>
+              <p class="vert-blurb">{VERTICAL_META[slug].blurb}</p>
+              <span class="vert-go">View projects →</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured work -->
+  {
+    featured.length > 0 && (
+      <section class="section-tight work">
+        <div class="container">
+          <div class="sec-head">
+            <div>
+              <p class="eyebrow">Selected work</p>
+              <h2 class="sec-title">Recent projects</h2>
+            </div>
+            <a href="/portfolio" class="sec-link">
+              All projects →
+            </a>
+          </div>
+          <div class="work-grid">
+            {featured.map((p) => (
+              <ProjectCard project={p} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container cta-inner">
+      <div>
+        <p class="eyebrow on-dark">Start a project</p>
+        <h2 class="cta-title">Have a facility on the drawing board?</h2>
+        <p class="cta-lede">
+          Send us the scope and we'll tell you how we'd approach it. Proposals
+          go to <a href={`mailto:${SITE.proposalEmail}`}>{SITE.proposalEmail}</a>.
+        </p>
+      </div>
+      <a href="/contact" class="btn btn-primary cta-btn">Request a proposal</a>
+    </div>
+  </section>
+
+  <style>
+    /* Hero */
+    .hero{position:relative;overflow:hidden;padding:clamp(60px,10vw,120px) 0 clamp(50px,7vw,90px)}
+    .hero-inner{position:relative;z-index:2;max-width:900px}
+    .hero-title{font-size:clamp(2.6rem,6.2vw,4.6rem);font-weight:800;margin:18px 0 22px}
+    .hero-lede{font-size:clamp(1.05rem,2vw,1.32rem);color:var(--ink-soft);max-width:60ch;line-height:1.6}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+    .hero-glow{
+      position:absolute;inset:0;z-index:1;pointer-events:none;
+      background:
+        radial-gradient(50% 60% at 88% 0%, rgba(30,58,99,.16), transparent 70%),
+        radial-gradient(45% 55% at 100% 40%, rgba(139,149,165,.18), transparent 70%);
+    }
+
+    /* Stats */
+    .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper)}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+    .stat{padding:30px 26px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+    .stat:last-child{border-right:none}
+    .stat-num{font-family:var(--font-display);font-weight:800;font-size:2.6rem;color:var(--accent);line-height:1}
+    .stat-label{font-size:.9rem;color:var(--muted)}
+    @media (max-width:760px){
+      .stats-grid{grid-template-columns:1fr 1fr}
+      .stat:nth-child(2){border-right:none}
+      .stat{border-bottom:1px solid var(--line)}
+    }
+
+    /* Section headings */
+    .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:40px;flex-wrap:wrap}
+    .sec-title{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:700}
+    .sec-note{color:var(--ink-soft);max-width:44ch;font-size:1rem}
+    .sec-link,.sec-link:visited{color:var(--accent-ink);font-family:var(--font-display);font-weight:600;text-decoration:none;white-space:nowrap}
+    .sec-link:hover{text-decoration:underline}
+
+    /* Verticals */
+    .verticals{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .vert{
+      display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;
+      background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+      padding:26px 24px;transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    }
+    .vert:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+    .vert-idx{font-family:var(--font-mono);font-size:12px;color:var(--accent);font-weight:600}
+    .vert-label{font-size:1.32rem;font-weight:700}
+    .vert-blurb{color:var(--ink-soft);font-size:.96rem;flex:1}
+    .vert-go{font-family:var(--font-display);font-weight:600;font-size:.9rem;color:var(--steel-ink);margin-top:6px}
+    @media (max-width:860px){.verticals{grid-template-columns:1fr 1fr}}
+    @media (max-width:560px){.verticals{grid-template-columns:1fr}}
+
+    /* Work */
+    .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    @media (max-width:920px){.work-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width:600px){.work-grid{grid-template-columns:1fr}}
+
+    /* CTA */
+    .cta{background:var(--ink-900);color:#fff;margin-top:clamp(50px,7vw,90px)}
+    .cta-inner{display:flex;justify-content:space-between;align-items:center;gap:36px;padding:clamp(46px,7vw,80px) 0;flex-wrap:wrap}
+    .cta-title{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;color:#fff;margin:12px 0 12px}
+    .cta-lede{color:#b8c0c8;max-width:52ch}
+    .cta-lede a{color:var(--on-dark-accent)}
+    .cta-btn{white-space:nowrap}
+    .cta .btn-primary{background:#fff;color:var(--accent)}
+    .cta .btn-primary:hover{background:var(--steel-wash)}
+  </style>
+</BaseLayout>

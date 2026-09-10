@@ -1,0 +1,84 @@
+---
+import { Image } from "astro:assets";
+import { VERTICAL_META } from "../data/site";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+const { project } = Astro.props;
+const d = project.data;
+const meta = VERTICAL_META[d.sector];
+const stat = d.squareFeet
+  ? `${d.squareFeet.toLocaleString()} sq ft`
+  : d.seats
+    ? `${d.seats.toLocaleString()} seats`
+    : meta.label;
+---
+
+<a href={`/work/${project.id}/`} class="card">
+  <div class="card-media">
+    {
+      d.heroImage ? (
+        <Image
+          src={d.heroImage}
+          alt={d.title}
+          width={720}
+          height={480}
+          class="card-img"
+        />
+      ) : (
+        <div class="card-ph" aria-hidden="true">
+          <span class="card-ph-mark">FDP</span>
+        </div>
+      )
+    }
+    <span class="card-sector">{meta.label}</span>
+  </div>
+  <div class="card-body">
+    <h3 class="card-title">{d.title}</h3>
+    <p class="card-summary">{d.summary}</p>
+    <div class="card-meta">
+      <span class="card-loc">{d.location}</span>
+      <span class="card-stat tabular">{stat}</span>
+    </div>
+  </div>
+</a>
+
+<style>
+  .card{
+    display:flex;flex-direction:column;text-decoration:none;color:inherit;
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg);
+    overflow:hidden;box-shadow:var(--shadow-sm);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--line-strong)}
+  .card-media{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--ink-900)}
+  .card-img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+  .card:hover .card-img{transform:scale(1.04)}
+  .card-ph{
+    width:100%;height:100%;display:grid;place-items:center;
+    background:
+      radial-gradient(120% 120% at 30% 20%, #2c4d84 0%, transparent 55%),
+      radial-gradient(120% 120% at 80% 90%, #9aa3b3 0%, transparent 60%),
+      var(--ink-900);
+  }
+  .card-ph-mark{
+    font-family:var(--font-display);font-weight:800;font-size:2rem;letter-spacing:.12em;
+    color:rgba(255,255,255,.28);
+  }
+  .card-sector{
+    position:absolute;top:12px;left:12px;
+    font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    background:rgba(20,25,32,.72);color:#fff;padding:5px 10px;border-radius:20px;backdrop-filter:blur(4px);
+  }
+  .card-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:9px;flex:1}
+  .card-title{font-size:1.28rem;font-weight:700}
+  .card-summary{color:var(--ink-soft);font-size:.96rem;line-height:1.55;flex:1}
+  .card-meta{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    margin-top:6px;padding-top:14px;border-top:1px solid var(--line);
+    font-size:.85rem;color:var(--muted);
+  }
+  .card-stat{font-family:var(--font-mono);color:var(--accent-ink);font-weight:500}
+</style>

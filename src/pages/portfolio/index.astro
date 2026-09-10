@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { VERTICAL_META } from "../../data/site";
+import { VERTICALS } from "../../content.config";
+
+const projects = (await getCollection("projects"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const counts = Object.fromEntries(
+  VERTICALS.map((v) => [v, projects.filter((p) => p.data.sector === v).length]),
+);
+---
+
+<BaseLayout title="Portfolio" description="Foodservice design projects across higher education, corporate, casinos, culinary, healthcare, and K-12.">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Portfolio</p>
+      <h1 class="page-title">Selected work</h1>
+      <p class="page-lede">
+        Browse by sector, or scroll the full list below. Each project is a look
+        at how we solved a specific foodservice problem — from master plan to
+        equipment schedule.
+      </p>
+      <div class="filters">
+        <a href="/portfolio" class="chip chip-active">All</a>
+        {
+          VERTICALS.map((v) => (
+            <a href={`/portfolio/${v}/`} class="chip">
+              {VERTICAL_META[v].label}
+              <span class="chip-n tabular">{counts[v]}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="grid">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .page-head{padding:clamp(48px,7vw,86px) 0 10px}
+    .page-title{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;margin:16px 0 16px}
+    .page-lede{color:var(--ink-soft);max-width:60ch;font-size:1.1rem}
+    .filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink-soft);
+      font-family:var(--font-display);font-weight:600;font-size:.92rem;
+      background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:9px 16px;
+      transition:border-color .15s ease, color .15s ease, background .15s ease;
+    }
+    .chip:hover{border-color:var(--line-strong);color:var(--ink)}
+    .chip-active{background:var(--ink);color:#fff;border-color:var(--ink)}
+    .chip-n{font-family:var(--font-mono);font-size:11px;opacity:.6}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    @media (max-width:920px){.grid{grid-template-columns:1fr 1fr}}
+    @media (max-width:600px){.grid{grid-template-columns:1fr}}
+  </style>
+</BaseLayout>

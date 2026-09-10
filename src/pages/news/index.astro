@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="News" description="Project announcements and updates from Foodservice Design Professionals.">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">News</p>
+      <h1 class="page-title">What we're working on</h1>
+      <p class="page-lede">
+        Project announcements, completed openings, and notes from the studio.
+        This section will be wired to a News content collection in Phase 2.
+      </p>
+      <div class="soon">
+        <span class="soon-mark">Coming in Phase 2</span>
+        <p>News posts will migrate here from the current site during content load.</p>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .page-head{padding:clamp(48px,7vw,86px) 0 90px}
+    .page-title{font-size:clamp(2.3rem,5vw,3.6rem);font-weight:800;margin:16px 0 16px}
+    .page-lede{color:var(--ink-soft);max-width:56ch;font-size:1.12rem}
+    .soon{margin-top:36px;background:var(--paper);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:28px 30px;max-width:520px}
+    .soon-mark{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);font-weight:600}
+    .soon p{margin-top:8px;color:var(--ink-soft)}
+  </style>
+</BaseLayout>

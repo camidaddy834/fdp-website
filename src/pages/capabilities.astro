@@ -1,0 +1,150 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { CAPABILITIES, CERTIFICATIONS } from "../data/company";
+import { VERTICAL_META } from "../data/site";
+import { VERTICALS } from "../content.config";
+---
+
+<BaseLayout title="Capabilities" description="FDP capabilities statement — core competencies, sectors served, certifications, and company snapshot.">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Capabilities Statement</p>
+      <h1 class="page-title">What we do, at a glance</h1>
+      <p class="page-lede">{CAPABILITIES.intro}</p>
+      <div class="head-actions">
+        <a href={CAPABILITIES.pdfPath} class="btn btn-primary" download>
+          ↓ Download the one-page PDF
+        </a>
+        <a href="/contact" class="btn btn-ghost">Request a proposal</a>
+      </div>
+      {
+        CAPABILITIES.placeholder && (
+          <p class="ph-flag" style="margin-top:22px">
+            Placeholder — confirm competencies, NAICS/UEI, and certifications
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container cap-grid">
+      <!-- Core competencies -->
+      <div class="cap-block">
+        <h2 class="cap-h">Core competencies</h2>
+        <ul class="cap-list">
+          {CAPABILITIES.coreCompetencies.map((c) => <li>{c}</li>)}
+        </ul>
+      </div>
+
+      <!-- Differentiators -->
+      <div class="cap-block">
+        <h2 class="cap-h">Why FDP</h2>
+        <ul class="cap-list cap-list-check">
+          {CAPABILITIES.differentiators.map((c) => <li>{c}</li>)}
+        </ul>
+      </div>
+
+      <!-- Snapshot -->
+      <div class="cap-block cap-snapshot">
+        <h2 class="cap-h">Company snapshot</h2>
+        <dl>
+          {
+            CAPABILITIES.snapshot.map((s) => (
+              <div class="snap-row">
+                <dt>{s.label}</dt>
+                <dd>{s.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sectors -->
+  <section class="section-tight cap-sectors">
+    <div class="container">
+      <h2 class="cap-h center">Sectors we serve</h2>
+      <div class="sector-row">
+        {
+          VERTICALS.map((v) => (
+            <a href={`/portfolio/${v}/`} class="sector-pill">
+              {VERTICAL_META[v].label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="cert-head">
+        <h2 class="cap-h">Certifications &amp; affiliations</h2>
+        {
+          CERTIFICATIONS.placeholder && (
+            <p class="ph-flag">Placeholder — replace with FDP's actual certifications</p>
+          )
+        }
+      </div>
+      <div class="cert-grid">
+        {
+          CERTIFICATIONS.items.map((c) => (
+            <div class="cert">
+              <div class="cert-badge">{c.logo ? <img src={c.logo} alt={c.name} /> : <span>{c.abbr}</span>}</div>
+              <div>
+                <h3 class="cert-name">{c.name}</h3>
+                <p class="cert-issuer">{c.issuer}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .page-head{padding:clamp(48px,7vw,86px) 0 10px}
+    .page-title{font-size:clamp(2.3rem,5vw,3.6rem);font-weight:800;margin:16px 0 18px}
+    .page-lede{color:var(--ink-soft);max-width:60ch;font-size:1.15rem;line-height:1.6}
+    .head-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+
+    .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
+    .cap-block{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:26px 26px;box-shadow:var(--shadow-sm)}
+    .cap-snapshot{border-top:3px solid var(--accent)}
+    .cap-h{font-family:var(--font-display);font-size:1.3rem;font-weight:700;margin-bottom:16px}
+    .cap-h.center{text-align:center;margin-bottom:24px}
+    .cap-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+    .cap-list li{position:relative;padding-left:20px;color:var(--ink-soft)}
+    .cap-list li::before{content:"";position:absolute;left:2px;top:.6em;width:7px;height:7px;border-radius:2px;background:var(--steel)}
+    .cap-list-check li::before{background:var(--accent);border-radius:50%}
+    .snap-row{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}
+    .snap-row:last-child{border-bottom:none}
+    .snap-row dt{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .snap-row dd{margin:0;font-weight:600;text-align:right;color:var(--ink)}
+    @media (max-width:860px){.cap-grid{grid-template-columns:1fr}}
+
+    .cap-sectors{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .sector-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+    .sector-pill{
+      text-decoration:none;color:var(--ink);font-family:var(--font-display);font-weight:600;
+      background:var(--ground);border:1px solid var(--line-strong);border-radius:24px;padding:10px 20px;
+      transition:border-color .15s ease, color .15s ease;
+    }
+    .sector-pill:hover{border-color:var(--accent);color:var(--accent-ink)}
+
+    .cert-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+    .cert-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .cert{display:flex;align-items:center;gap:18px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
+    .cert-badge{
+      flex:none;width:64px;height:64px;border-radius:12px;display:grid;place-items:center;
+      background:var(--accent-wash);color:var(--accent-ink);font-family:var(--font-display);font-weight:800;font-size:1.05rem;
+    }
+    .cert-badge img{width:100%;height:100%;object-fit:contain;border-radius:12px}
+    .cert-name{font-size:1.05rem;font-weight:700}
+    .cert-issuer{color:var(--muted);font-size:.9rem;margin-top:2px}
+    @media (max-width:640px){.cert-grid{grid-template-columns:1fr}}
+  </style>
+</BaseLayout>

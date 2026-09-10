@@ -1,0 +1,100 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { TEAM } from "../data/company";
+
+// Build monogram initials from a member name (skips [placeholder] brackets)
+function initials(name: string): string {
+  const clean = name.replace(/[\[\]]/g, "").trim();
+  const parts = clean.split(/\s+/).filter(Boolean);
+  if (!parts.length) return "FDP";
+  return (parts[0][0] + (parts[1]?.[0] ?? "")).toUpperCase();
+}
+---
+
+<BaseLayout title="Team" description="Meet the foodservice designers, project managers, and specialists behind FDP.">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Our Team</p>
+      <h1 class="page-title">The people behind the plans</h1>
+      <p class="page-lede">
+        Foodservice design is detail work, and it takes a team that has done it
+        many times over. Meet the designers, project managers, and specialists
+        who bring FDP projects to life.
+      </p>
+      {
+        TEAM.placeholder && (
+          <p class="ph-flag" style="margin-top:22px">
+            Placeholder — add real staff photos, names, titles & bios
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="team-grid">
+        {
+          TEAM.members.map((m) => (
+            <article class="member">
+              <div class="member-photo">
+                {
+                  m.photo ? (
+                    <img src={m.photo} alt={m.name} width="360" height="360" />
+                  ) : (
+                    <div class="monogram" aria-hidden="true">
+                      <span>{initials(m.name)}</span>
+                    </div>
+                  )
+                }
+              </div>
+              <h3 class="member-name">{m.name}</h3>
+              <p class="member-title">{m.title}</p>
+              {m.bio && <p class="member-bio">{m.bio}</p>}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="join">
+    <div class="container join-inner">
+      <div>
+        <p class="eyebrow on-dark">Careers</p>
+        <h2 class="join-title">Interested in joining FDP?</h2>
+        <p class="join-lede">
+          We're always glad to hear from foodservice designers and project
+          managers who care about getting the details right.
+        </p>
+      </div>
+      <a href="/contact" class="btn btn-primary join-btn">Get in touch</a>
+    </div>
+  </section>
+
+  <style>
+    .page-head{padding:clamp(48px,7vw,90px) 0 10px}
+    .page-title{font-size:clamp(2.4rem,5vw,3.7rem);font-weight:800;max-width:16ch;margin:16px 0 18px}
+    .page-lede{color:var(--ink-soft);max-width:60ch;font-size:1.15rem;line-height:1.6}
+
+    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,34px)}
+    .member{display:flex;flex-direction:column}
+    .member-photo{margin-bottom:16px}
+    .member-photo img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius-lg)}
+    .monogram{width:100%;font-size:clamp(2rem,4vw,2.8rem);border-radius:var(--radius-lg)}
+    .monogram{border-radius:var(--radius-lg)}
+    .member-name{font-size:1.32rem;font-weight:700}
+    .member-title{font-family:var(--font-mono);font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-ink);margin:4px 0 10px}
+    .member-bio{color:var(--ink-soft);font-size:.96rem}
+    @media (max-width:820px){.team-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width:520px){.team-grid{grid-template-columns:1fr}}
+
+    .join{background:var(--ink-900);color:#fff;margin-top:clamp(50px,7vw,90px)}
+    .join-inner{display:flex;justify-content:space-between;align-items:center;gap:36px;padding:clamp(46px,7vw,80px) 0;flex-wrap:wrap}
+    .join-title{font-size:clamp(1.7rem,3.2vw,2.5rem);font-weight:800;color:#fff;margin:12px 0 12px}
+    .join-lede{color:#b8c0c8;max-width:50ch}
+    .join .btn-primary{background:#fff;color:var(--accent)}
+    .join .btn-primary:hover{background:var(--steel-wash)}
+    .join-btn{white-space:nowrap}
+  </style>
+</BaseLayout>
