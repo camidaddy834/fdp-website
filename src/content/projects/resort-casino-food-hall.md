@@ -2,7 +2,7 @@
 # SAMPLE / PLACEHOLDER PROJECT — replace with a real FDP case study
 title: "Resort Casino Food Hall"
 client: "Confidential — Gaming & Hospitality"
-sector: "casinos"
+sector: "hospitality"
 location: "Dallas–Fort Worth, TX"
 year: 2024
 squareFeet: 24000

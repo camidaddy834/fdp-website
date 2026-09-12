@@ -2,7 +2,7 @@
 # SAMPLE / PLACEHOLDER PROJECT — replace with a real FDP case study
 title: "University Dining Commons"
 client: "Regional State University"
-sector: "higher-education"
+sector: "universities"
 location: "Dallas, TX"
 year: 2024
 squareFeet: 38000

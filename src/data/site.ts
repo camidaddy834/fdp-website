@@ -29,35 +29,55 @@ export const VERTICAL_META: Record<
   Vertical,
   { label: string; blurb: string }
 > = {
-  "higher-education": {
-    label: "Higher Education",
+  government: {
+    label: "Government",
     blurb:
-      "Dining halls, retail venues, and teaching kitchens that keep pace with campus life.",
+      "Foodservice for public agencies and civic facilities — built to code, budget, and public accountability.",
   },
   corporate: {
     label: "Corporate",
     blurb:
       "Employee cafés and executive dining that make the workplace a destination.",
   },
-  casinos: {
-    label: "Casinos",
-    blurb:
-      "High-volume gaming-floor kitchens and signature restaurants built for throughput.",
-  },
-  culinary: {
-    label: "Culinary",
-    blurb:
-      "Restaurants, central kitchens, and specialty concepts designed around the menu.",
-  },
-  healthcare: {
-    label: "Healthcare",
+  "health-care": {
+    label: "Health Care",
     blurb:
       "Patient-first foodservice and staff dining that meet demanding clinical standards.",
+  },
+  hospitality: {
+    label: "Hospitality",
+    blurb:
+      "Hotels, resorts, casinos, and signature restaurants engineered for high-volume service.",
+  },
+  sports: {
+    label: "Sports",
+    blurb:
+      "Concessions, clubs, and premium dining for stadiums, arenas, and event venues.",
+  },
+  universities: {
+    label: "Universities",
+    blurb:
+      "Dining halls, retail venues, and teaching kitchens that keep pace with campus life.",
   },
   "k-12": {
     label: "K-12",
     blurb:
       "Efficient serving lines and scratch kitchens that feed schools at scale.",
+  },
+  retail: {
+    label: "Retail",
+    blurb:
+      "Grocery, market, and grab-and-go foodservice designed for throughput and freshness.",
+  },
+  correctional: {
+    label: "Correctional",
+    blurb:
+      "Secure, high-capacity kitchens engineered for safety, durability, and volume.",
+  },
+  "production-centers": {
+    label: "Production Centers",
+    blurb:
+      "Central kitchens and commissaries built to produce and distribute at scale.",
   },
 };
 

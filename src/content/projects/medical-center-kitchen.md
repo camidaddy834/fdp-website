@@ -2,7 +2,7 @@
 # SAMPLE / PLACEHOLDER PROJECT — replace with a real FDP case study
 title: "Regional Medical Center Kitchen"
 client: "Regional Health System"
-sector: "healthcare"
+sector: "health-care"
 location: "Houston, TX"
 year: 2023
 squareFeet: 21000

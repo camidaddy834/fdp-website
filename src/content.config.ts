@@ -3,12 +3,16 @@ import { glob } from "astro/loaders";
 
 /** The six industry verticals FDP designs for. Slugs drive the portfolio URLs. */
 export const VERTICALS = [
-  "higher-education",
+  "government",
   "corporate",
-  "casinos",
-  "culinary",
-  "healthcare",
+  "health-care",
+  "hospitality",
+  "sports",
+  "universities",
   "k-12",
+  "retail",
+  "correctional",
+  "production-centers",
 ] as const;
 
 /**

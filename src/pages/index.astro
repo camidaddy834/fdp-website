@@ -35,12 +35,37 @@ const featured = projects
     <div class="hero-glow" aria-hidden="true"></div>
   </section>
 
+  <!-- Overview / positioning -->
+  <section class="overview">
+    <div class="container overview-inner">
+      <p class="eyebrow">About FDP</p>
+      <p class="overview-lead">
+        FDP is a professional foodservice facility design firm that combines
+        multidisciplinary experience with cutting-edge technologies and highly
+        skilled professionals to meet our clients&rsquo; needs in a personal,
+        innovative, and cost-effective manner.
+      </p>
+      <p class="overview-body">
+        FDP is well qualified to perform any foodservice planning and design
+        service. Our company has been involved in many diverse market projects
+        <strong>nationally and internationally</strong> &mdash; sectors include,
+        but are not limited to, Government, Corporate, Health Care, Hospitality,
+        Sports, Universities, K&#8209;12, Retail, Correctional, and Production
+        Centers.
+      </p>
+      <p class="overview-note">
+        Foodservice Design Professionals is a closed Texas Limited Liability
+        Company.
+      </p>
+    </div>
+  </section>
+
   <!-- Stat band -->
   <section class="stats">
     <div class="container stats-grid">
       <div class="stat">
-        <span class="stat-num tabular">6</span>
-        <span class="stat-label">Industry sectors served</span>
+        <span class="stat-num tabular">10+</span>
+        <span class="stat-label">Markets served</span>
       </div>
       <div class="stat">
         <span class="stat-num tabular">2</span>
@@ -62,13 +87,13 @@ const featured = projects
     <div class="container">
       <div class="sec-head">
         <div>
-          <p class="eyebrow">What we design</p>
-          <h2 class="sec-title">Six sectors, one discipline</h2>
+          <p class="eyebrow">Our work</p>
+          <h2 class="sec-title">Explore work by sector</h2>
         </div>
         <p class="sec-note">
-          Every project runs on the same rigor — master planning, foodservice
-          design, and equipment specification — tuned to the demands of each
-          environment.
+          A selection of the markets we serve — each backed by the same rigor:
+          master planning, foodservice design, and equipment specification,
+          tuned to the demands of the environment.
         </p>
       </div>
       <div class="verticals">
@@ -139,6 +164,24 @@ const featured = projects
       background:
         radial-gradient(50% 60% at 88% 0%, rgba(30,58,99,.16), transparent 70%),
         radial-gradient(45% 55% at 100% 40%, rgba(139,149,165,.18), transparent 70%);
+    }
+
+    /* Overview */
+    .overview{padding:clamp(48px,8vw,96px) 0}
+    .overview-inner{max-width:900px}
+    .overview-lead{
+      font-family:var(--font-display);font-weight:600;
+      font-size:clamp(1.4rem,2.9vw,2.15rem);line-height:1.32;letter-spacing:-.01em;
+      color:var(--ink);margin:18px 0 0;text-wrap:pretty;
+    }
+    .overview-body{
+      font-size:clamp(1.02rem,1.7vw,1.18rem);line-height:1.7;color:var(--ink-soft);
+      max-width:68ch;margin:24px 0 0;
+    }
+    .overview-body strong{color:var(--ink);font-weight:600}
+    .overview-note{
+      font-family:var(--font-mono);font-size:.8rem;letter-spacing:.02em;color:var(--muted);
+      margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line);
     }
 
     /* Stats */
