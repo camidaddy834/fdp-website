@@ -12,12 +12,14 @@ export const OFFICES = [
   {
     city: "Dallas",
     area: "Southlake",
+    address: "584 N. Kimball Ave, Southlake, TX 76092",
     phone: "972-245-5300",
     phoneHref: "tel:+19722455300",
   },
   {
     city: "Houston",
     area: "The Woodlands",
+    address: "594 Sawdust Rd, Suite 139, The Woodlands, TX 77380",
     phone: "281-350-2323",
     phoneHref: "tel:+12813502323",
   },

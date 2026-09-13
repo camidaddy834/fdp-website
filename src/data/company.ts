@@ -55,14 +55,20 @@ export interface TeamMember {
 }
 
 export const TEAM = {
-  placeholder: true,
+  placeholder: false,
   members: [
-    { name: "[Principal name]", title: "Principal / Founder", photo: null, bio: "Short bio — background, focus areas, years in foodservice design." },
-    { name: "[Team member]", title: "Senior Designer", photo: null, bio: "Short bio placeholder." },
-    { name: "[Team member]", title: "Project Manager", photo: null, bio: "Short bio placeholder." },
-    { name: "[Team member]", title: "Foodservice Designer", photo: null, bio: "Short bio placeholder." },
-    { name: "[Team member]", title: "Equipment Specialist", photo: null, bio: "Short bio placeholder." },
-    { name: "[Team member]", title: "Designer", photo: null, bio: "Short bio placeholder." },
+    {
+      name: "Melissa Moore, FCSI",
+      title: "Chief Executive Officer",
+      photo: null,
+      bio: "Melissa leads FDP with 17 years of design experience, 20+ years in the foodservice industry, and 30+ years of leadership. Based in South Texas, she designs, coordinates, and oversees projects for her team across the region.",
+    },
+    {
+      name: "Lance Brooks",
+      title: "President",
+      photo: null,
+      bio: "Lance brings 24+ years of design experience and 30+ years in the foodservice industry. Based in North Texas, he designs, coordinates, and oversees projects for his team across the region.",
+    },
   ] as TeamMember[],
 };
 
