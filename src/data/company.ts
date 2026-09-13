@@ -32,32 +32,14 @@ export const MISSION = {
  * FDP's actual certifications (and add logo files to /public/certs/).
  */
 export const CERTIFICATIONS = {
-  placeholder: true,
+  placeholder: false,
   items: [
-    {
-      abbr: "HUB",
-      name: "Historically Underutilized Business",
-      issuer: "State of Texas",
-      logo: null as string | null,
-    },
-    {
-      abbr: "DBE",
-      name: "Disadvantaged Business Enterprise",
-      issuer: "Issuing agency TBD",
-      logo: null as string | null,
-    },
-    {
-      abbr: "SBE",
-      name: "Small Business Enterprise",
-      issuer: "Issuing agency TBD",
-      logo: null as string | null,
-    },
-    {
-      abbr: "FCSI",
-      name: "Foodservice Consultants Society International (member)",
-      issuer: "Professional affiliation",
-      logo: null as string | null,
-    },
+    { abbr: "WBE", name: "Women's Business Enterprise", issuer: "Diversity certification", logo: null as string | null },
+    { abbr: "WOSB", name: "Woman-Owned Small Business", issuer: "U.S. SBA program", logo: null as string | null },
+    { abbr: "SBA", name: "Small Business Administration", issuer: "Federal", logo: null as string | null },
+    { abbr: "SBE", name: "Small Business Enterprise", issuer: "Diversity certification", logo: null as string | null },
+    { abbr: "SDB", name: "Small Disadvantaged Business", issuer: "U.S. SBA program", logo: null as string | null },
+    { abbr: "HUB", name: "Historically Underutilized Business", issuer: "State of Texas", logo: null as string | null },
   ],
 };
 
@@ -86,35 +68,35 @@ export const TEAM = {
 
 /** Capabilities Statement content (also feeds the downloadable PDF). */
 export const CAPABILITIES = {
-  placeholder: true,
+  placeholder: false,
   intro:
-    "Foodservice Design Professionals provides master planning, foodservice facility design, and equipment specification for institutional and commercial clients across six sectors.",
+    "FDP is a professional foodservice facility design firm that combines multidisciplinary experience with cutting-edge technology and highly skilled professionals — serving diverse markets nationally and internationally.",
   coreCompetencies: [
-    "Foodservice master planning & programming",
-    "Kitchen & servery design",
-    "Equipment specification & biddable schedules",
-    "Utility & ventilation coordination",
-    "Concept development & test fits",
-    "Construction-phase support",
+    "Commercial, non-commercial & industrial foodservice",
+    "New designs and renovations / expansions",
+    "District-wide assessments",
+    "Facility design guidelines",
+    "Programming, schematic design, design development, construction documents & administration",
+    "3D renderings",
+    "Revit software",
+    "VR technology",
   ],
   differentiators: [
-    "Foodservice design is our sole discipline — not a side practice.",
-    "30+ years designing high-volume facilities across Texas.",
-    "Designs engineered around throughput, labor, and long-term durability.",
+    "Certified WBE, WOSB, SBA, SBE, SDB & HUB.",
+    "Cutting-edge tools — Revit, 3D rendering, and VR technology.",
+    "Diverse market experience, nationally and internationally, since 1997.",
   ],
   snapshot: [
+    { label: "Business Name", value: "Foodservice Design Professionals LLC" },
     { label: "Founded", value: "1997" },
-    { label: "Business Name", value: "Foodservice Design Professionals LLC" },   
     { label: "DUNS", value: "02153580" },
     { label: "UEID", value: "QUNELMMQ2SN9" },
-    { label: "CAGE", value: "7YWH3" },     
-    { label: "Certifications", value: "WBE, WOSB, SBA, SBE, SDB and HUB" },
-    { label: "NAICS CODE", value: "541310 - Architectural Services " },
-    { label: "SIC CODE", value: "8712 - Architectural Services" },
-    { label: "NIGP CODE", value: "906-07: Architect Services, Professional, Including Consulting" },
-    { label: "NIGP CODE", value: "918-52: Food Service Consulting"},
-    { label: "UNSPSC CODE", value: "2141505 - Computer Generated Design Services"}  ,  
-
+    { label: "CAGE", value: "7YWH3" },
+    { label: "Certifications", value: "WBE, WOSB, SBA, SBE, SDB & HUB" },
+    { label: "NAICS", value: "541310 — Architectural Services" },
+    { label: "SIC", value: "8712 — Architectural Services" },
+    { label: "NIGP", value: "906-07 Architect Services; 918-52 Food Service Consulting" },
+    { label: "UNSPSC", value: "82141505 — Computer Generated Design Services" },
   ],
   pdfPath: "/fdp-capabilities-statement.pdf",
 };
