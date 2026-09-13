@@ -6,9 +6,9 @@
    ============================================================ */
 
 export const MISSION = {
-  placeholder: true,
+  placeholder: false,
   statement:
-    "To design foodservice facilities that perform — spaces that serve more people, run more efficiently, and endure for decades — while making the process straightforward for the owners, operators, and design teams we partner with.",
+    "We exist to make foodservice facilities work better — designing kitchens and dining environments that serve more people, run more efficiently, and endure, while keeping the process straightforward for the teams we partner with.",
   // Optional supporting values shown beneath the statement
   values: [
     {
