@@ -52,6 +52,7 @@ export interface TeamMember {
   title: string;
   bio?: string;
   photo?: string | null;
+  placeholder?: boolean;
 }
 
 export const TEAM = {
@@ -64,11 +65,40 @@ export const TEAM = {
       bio: "Melissa leads FDP with 17 years of design experience, 20+ years in the foodservice industry, and 30+ years of leadership. Based in South Texas, she designs, coordinates, and oversees projects for her team across the region.",
     },
     {
-      name: "Lance Brooks",
+      name: "Lance Brooks, FCSI",
       title: "President",
       photo: null,
       bio: "Lance brings 24+ years of design experience and 30+ years in the foodservice industry. Based in North Texas, he designs, coordinates, and oversees projects for his team across the region.",
     },
+    // Placeholders — replace name/title/photo as real staff are added.
+    { name: "[Team member 03]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 04]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 05]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 06]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 07]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 08]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 09]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 10]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 11]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 12]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 13]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 14]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 15]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 16]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 17]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 18]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 19]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 20]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 21]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 22]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 23]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 24]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 25]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 26]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 27]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 28]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 29]", title: "[Title]", photo: null, placeholder: true },
+    { name: "[Team member 30]", title: "[Title]", photo: null, placeholder: true },
   ] as TeamMember[],
 };
 
