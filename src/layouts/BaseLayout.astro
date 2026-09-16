@@ -33,6 +33,16 @@ const isActive = (href: string) =>
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:type" content="website" />
+    {
+      SITE.cfBeaconToken && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: SITE.cfBeaconToken })}
+        />
+      )
+    }
   </head>
   <body>
     <a href="#main" class="skip">Skip to content</a>

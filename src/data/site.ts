@@ -5,6 +5,9 @@ export const SITE = {
   short: "FDP",
   tagline: "Foodservice facility design & consulting",
   proposalEmail: "proposal@fdp.org",
+  // Cloudflare Web Analytics beacon token. Paste the token from your
+  // Cloudflare Web Analytics site here; the beacon renders only when set.
+  cfBeaconToken: "deab28742e984c95b0fa61fff4565abc",
 };
 
 /** Two offices — Dallas & Houston (San Antonio/Austin retired in the redesign). */
