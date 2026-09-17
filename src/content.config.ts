@@ -42,4 +42,21 @@ const projects = defineCollection({
     }),
 });
 
-export const collections = { projects };
+/**
+ * News / blog posts (migrated from the old Wix site). heroImage is a public
+ * path string (files live in /public/news/), so no image() helper is needed.
+ */
+const news = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/news" }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    author: z.string().default("FDP"),
+    excerpt: z.string().optional(),
+    heroImage: z.string().optional(),
+    originalUrl: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { projects, news };
