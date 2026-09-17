@@ -11,6 +11,7 @@ services: ["Master Planning", "Foodservice Design", "Equipment Specification"]
 summary: "A residential dining hall reimagined as eight interactive micro-restaurants, doubling throughput at peak without expanding the footprint."
 featured: true
 order: 1
+draft: true
 ---
 
 ## The challenge

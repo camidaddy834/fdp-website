@@ -11,6 +11,7 @@ services: ["Foodservice Design", "Equipment Specification", "Regulatory Complian
 summary: "A room-service production kitchen and staff café built to hospital-grade standards — patient meals on demand, 24 hours a day."
 featured: true
 order: 4
+draft: true
 ---
 
 ## The challenge

@@ -11,6 +11,7 @@ services: ["Master Planning", "Foodservice Design", "Concept Development"]
 summary: "Seven food-hall concepts and a central production kitchen engineered to feed a 24-hour gaming floor without a single closed hour."
 featured: false
 order: 3
+draft: true
 ---
 
 ## The challenge
