@@ -17,16 +17,16 @@ export const MISSION = {
   // Optional supporting values shown beneath the statement
   values: [
     {
-      title: "Performance first",
-      body: "We design around how a kitchen actually runs, not just how it looks on a plan.",
+      title: "Client-first",
+      body: "We collaborate closely to understand each client’s unique needs and operational requirements — then design around their vision.",
     },
     {
-      title: "Partnership",
-      body: "We coordinate closely with architects, operators, and MEP so nothing gets value-engineered into a bottleneck.",
+      title: "Innovation",
+      body: "We stay at the forefront of industry trends, bringing the latest technologies and design principles to every facility.",
     },
     {
-      title: "Longevity",
-      body: "We specify for the long haul — equipment and layouts that hold up under real-world volume.",
+      title: "Sustainable by design",
+      body: "We balance creativity, functionality, and sustainability — spaces that are aesthetically pleasing, operationally seamless, and environmentally responsible.",
     },
   ],
 };
