@@ -1,7 +1,9 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
-/** The six industry verticals FDP designs for. Slugs drive the portfolio URLs. */
+/** The industry verticals FDP designs for. Slugs drive the portfolio URLs.
+ *  To add a vertical: add its slug here AND a label/blurb in VERTICAL_META
+ *  (src/data/site.ts) — TypeScript will flag the pair if you miss one. */
 export const VERTICALS = [
   "government",
   "corporate",
@@ -21,7 +23,9 @@ export const VERTICALS = [
  * (challenge -> design solution -> outcome).
  */
 const projects = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
+  // Every .md file here becomes a project — except underscore-prefixed files
+  // (e.g. _TEMPLATE.md), which are ignored so starters/notes can live alongside.
+  loader: glob({ pattern: ["**/*.md", "!**/_*.md"], base: "./src/content/projects" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -47,7 +51,7 @@ const projects = defineCollection({
  * path string (files live in /public/news/), so no image() helper is needed.
  */
 const news = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/news" }),
+  loader: glob({ pattern: ["**/*.md", "!**/_*.md"], base: "./src/content/news" }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),

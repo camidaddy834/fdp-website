@@ -10,6 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "new:project": "node scripts/new-project.mjs",
     "deploy": "astro build && netlify deploy --dir=dist --prod"
   },
   "dependencies": {
