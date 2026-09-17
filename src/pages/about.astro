@@ -50,7 +50,12 @@ function initials(name: string): string {
         <p class="eyebrow">Our Mission</p>
         {MISSION.placeholder && <span class="ph-flag">Placeholder — replace with FDP's mission statement</span>}
       </div>
-      <p class="mission-statement">{MISSION.statement}</p>
+      <p class="mission-statement">{MISSION.statement[0]}</p>
+      {
+        MISSION.statement.slice(1).map((para) => (
+          <p class="mission-body">{para}</p>
+        ))
+      }
       <div class="values">
         {
           MISSION.values.map((v) => (
@@ -161,7 +166,8 @@ function initials(name: string): string {
     /* Mission */
     .mission{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(46px,7vw,84px) 0}
     .mission-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}
-    .mission-statement{font-family:var(--font-display);font-weight:600;font-size:clamp(1.5rem,3.2vw,2.3rem);line-height:1.3;letter-spacing:-.01em;max-width:24ch;color:var(--ink);text-wrap:balance}
+    .mission-statement{font-family:var(--font-display);font-weight:600;font-size:clamp(1.35rem,2.4vw,1.75rem);line-height:1.4;letter-spacing:-.01em;max-width:58ch;color:var(--ink);text-wrap:pretty}
+    .mission-body{max-width:64ch;color:var(--ink-soft);font-size:1.02rem;line-height:1.7;margin-top:1.1em}
     .values{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:38px}
     .value{border-left:2px solid var(--accent);padding-left:18px}
     .value-h{font-size:1.1rem;font-weight:700;margin-bottom:6px}

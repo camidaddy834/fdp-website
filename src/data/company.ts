@@ -7,8 +7,13 @@
 
 export const MISSION = {
   placeholder: false,
-  statement:
-    "We exist to make foodservice facilities work better — designing kitchens and dining environments that serve more people, run more efficiently, and endure, while keeping the process straightforward for the teams we partner with.",
+  // First entry is the lead paragraph (shown large); the rest read as body copy.
+  statement: [
+    "Our mission at Foodservice Design Professionals is to transform our clients’ aspirations into reality by delivering exceptional food service facility designs. We are dedicated to collaborating closely with our clients to understand their unique needs and operational requirements. Through a synthesis of creativity, functionality, and sustainability, we strive to design environments that enhance operational efficiency and elevate the overall dining experience.",
+    "Our mission’s core is a commitment to innovation and continuous improvement. We aim to stay at the forefront of industry trends, incorporating the latest technologies and design principles to ensure our client’s facilities are state-of-the-art and adaptable to evolving needs.",
+    "A passion for excellence drives us, and our mission is to exceed client expectations by providing aesthetically pleasing, operationally seamless, and environmentally responsible designs. In every project, we emphasize quality craftsmanship, attention to detail, and a client-centric approach to ensure the successful realization of our clients’ visions.",
+    "In summary, our mission at Foodservice Design Professionals is to be a trusted partner for food service facility design, committed to excellence, innovation, sustainability, and client satisfaction.",
+  ],
   // Optional supporting values shown beneath the statement
   values: [
     {
