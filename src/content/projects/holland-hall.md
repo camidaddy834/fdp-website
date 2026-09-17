@@ -7,7 +7,7 @@ services: ["Foodservice Design", "Servery Design"]
 summary: "A private school's refectory reimagined as a bright, modern lunchroom."
 heroImage: ../../assets/projects/holland-hall.png
 featured: true
-order: 2
+order: 4
 ---
 
 ## The project

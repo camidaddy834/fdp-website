@@ -6,8 +6,8 @@ location: "Fort Worth, TX"
 services: ["Foodservice Design", "Teaching Kitchen Design", "Equipment Specification"]
 summary: "A state-of-the-art culinary arts teaching facility giving high-school students a professional-grade kitchen to learn in."
 heroImage: ../../assets/projects/northside-hs-culinary.png
-featured: true
-order: 3
+featured: false
+order: 5
 ---
 
 ## The project

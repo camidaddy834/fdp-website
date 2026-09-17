@@ -7,7 +7,7 @@ services: ["Foodservice Design", "Equipment Specification"]
 summary: "A much-needed overhaul of the foodservice facilities at Alvin High School."
 heroImage: ../../assets/projects/alvin-hs.png
 featured: false
-order: 4
+order: 6
 ---
 
 ## The project
