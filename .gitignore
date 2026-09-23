@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+
+# History archive: full-res source scans stay local (web-optimized copies live in public/history/)
+history-originals/

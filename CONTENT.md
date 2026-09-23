@@ -65,6 +65,30 @@ Drop a Markdown file in `src/content/news/`. Frontmatter: `title`, `date`
 `/public/news/`), `originalUrl`, and `draft`. It appears on `/news/` and at
 `/news/<slug>/`.
 
+## Add History archive drawings & media
+
+The History page (`/history`) shows a gallery of original drawings and media.
+It handles large scans (JPGs and single-page PDFs) by generating web-optimized
+copies automatically — you don't touch the website code.
+
+1. Put the full-resolution scans in the **`history-originals/`** folder at the
+   project root. (This folder stays on your machine — it is git-ignored and not
+   deployed, so the big files never bloat the repo.)
+2. Run:
+
+   ```bash
+   npm run history:build
+   ```
+
+   For each scan this writes a web-optimized full view (`public/history/<name>.jpg`,
+   ~2600px) and a grid thumbnail (`public/history/thumbs/<name>.jpg`). PDFs are
+   rasterized from their first page.
+3. The History page auto-discovers them — each thumbnail links to the full view.
+   Remove a scan and re-run to drop it.
+
+Then deploy (below). Keep your true originals wherever you archive them; only the
+optimized copies live in the repo.
+
 ## Publishing
 
 Content only goes live after a deploy. Commit the new file, then run:

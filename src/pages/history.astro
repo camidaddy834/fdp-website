@@ -1,11 +1,30 @@
 ---
+import fs from "node:fs";
+import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { HISTORY } from "../data/company";
 import { SITE } from "../data/site";
 
-const { intro, milestones, archive, headline } = HISTORY;
-// Show real archive media if provided; otherwise render placeholder tiles.
-const archiveTiles = archive.length > 0 ? archive : Array.from({ length: 6 });
+const { intro, milestones, headline } = HISTORY;
+
+// Auto-discover archive media in /public/history (scanned at build). Web-ready
+// full views + thumbnails are produced from history-originals/ by
+// `npm run history:build`; the page just lists whatever full-view JPGs exist.
+type Media = { src: string; thumb: string };
+let media: Media[] = [];
+try {
+  media = fs
+    .readdirSync(path.resolve("public/history"))
+    .filter((f) => /\.jpe?g$/i.test(f))
+    .sort()
+    .map((f) => ({
+      src: encodeURI(`/history/${f}`),
+      thumb: encodeURI(`/history/thumbs/${f}`),
+    }));
+} catch {
+  /* folder not present yet → placeholder tiles below */
+}
+const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
 ---
 
 <BaseLayout
@@ -55,17 +74,16 @@ const archiveTiles = archive.length > 0 ? archive : Array.from({ length: 6 });
         </div>
       </div>
       <p class="archive-note">
-        Decades of original drawings, plans, and photography. Add scans to{" "}
-        <code>/public/history/</code> and they'll appear here.
+        Decades of original drawings, plans, and photography from the FDP
+        archive. Select an item to open the full-resolution scan.
       </p>
       <div class="archive-grid">
         {
           archiveTiles.map((item: any) =>
             item?.src ? (
-              <figure class="arch">
-                <img src={item.src} alt={item.caption} loading="lazy" />
-                <figcaption>{item.caption}</figcaption>
-              </figure>
+              <a class="arch" href={item.src} target="_blank" rel="noopener">
+                <img src={item.thumb} alt="FDP historical drawing" loading="lazy" />
+              </a>
             ) : (
               <div class="arch arch-ph" aria-hidden="true">
                 <span class="arch-mark">FDP</span>
@@ -125,9 +143,18 @@ const archiveTiles = archive.length > 0 ? archive : Array.from({ length: 6 });
     .archive-note{color:var(--ink-soft);max-width:56ch;margin-bottom:26px}
     .archive-note code{font-family:var(--font-mono);font-size:.85em;background:var(--steel-wash);padding:2px 6px;border-radius:5px}
     .archive-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .arch{margin:0;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);background:var(--paper)}
-    .arch img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
-    .arch figcaption{padding:12px 14px;font-size:.9rem;color:var(--ink-soft)}
+    .arch{
+      position:relative;display:block;margin:0;border-radius:var(--radius-lg);overflow:hidden;
+      border:1px solid var(--line);background:#f4f5f3;
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .arch:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--line-strong)}
+    .arch img{width:100%;aspect-ratio:3/4;object-fit:contain;display:block}
+    .arch-badge{
+      position:absolute;top:10px;right:10px;
+      font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.08em;
+      background:rgba(20,25,32,.78);color:#fff;padding:4px 8px;border-radius:6px;backdrop-filter:blur(4px);
+    }
     .arch-ph{
       aspect-ratio:4/3;display:grid;place-items:center;
       background:
