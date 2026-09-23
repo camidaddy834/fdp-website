@@ -91,8 +91,22 @@ export const TEAM = {
   placeholder: false,
   members: [
     // Principals
-    { name: "Melissa Moore, FCSI", title: "Chief Executive Officer", location: "Houston", lead: true, photo: null },
-    { name: "Lance Brooks, FCSI", title: "President", location: "Dallas", lead: true, photo: null },
+    {
+      name: "Melissa Moore, FCSI",
+      title: "Chief Executive Officer",
+      location: "Houston",
+      lead: true,
+      photo: null,
+      bio: "Melissa leads FDP with 17 years of design experience, 20+ years in the foodservice industry, and 30+ years of leadership. Based in South Texas, she designs, coordinates, and oversees projects for her team across the region.",
+    },
+    {
+      name: "Lance Brooks, FCSI",
+      title: "President",
+      location: "Dallas",
+      lead: true,
+      photo: null,
+      bio: "Lance brings 24+ years of design experience and 30+ years in the foodservice industry. Based in North Texas, he designs, coordinates, and oversees projects for his team across the region.",
+    },
     // Dallas
     { name: "Christina MacMicken", title: "CA Manager", location: "Dallas", photo: null },
     { name: "Sherri Myers", title: "Project Manager", location: "Dallas", photo: null },
