@@ -74,61 +74,52 @@ export const CERTIFICATIONS = {
 };
 
 /**
- * Team members. Photos go in /public/team/ (e.g. "/team/jane-doe.jpg").
- * With photo: null, a branded monogram placeholder renders instead.
+ * Team members (source: "FDP Staff 2025" roster). Photos go in /public/team/
+ * (e.g. "/team/jane-doe.jpg"); with photo: null a monogram of initials renders.
+ * `lead` marks the two principals; `location` is the office (Dallas | Houston).
  */
 export interface TeamMember {
   name: string;
   title: string;
+  location?: string;
   bio?: string;
   photo?: string | null;
-  placeholder?: boolean;
+  lead?: boolean;
 }
 
 export const TEAM = {
   placeholder: false,
   members: [
-    {
-      name: "Melissa Moore, FCSI",
-      title: "Chief Executive Officer",
-      photo: null,
-      bio: "Melissa leads FDP with 17 years of design experience, 20+ years in the foodservice industry, and 30+ years of leadership. Based in South Texas, she designs, coordinates, and oversees projects for her team across the region.",
-    },
-    {
-      name: "Lance Brooks, FCSI",
-      title: "President",
-      photo: null,
-      bio: "Lance brings 24+ years of design experience and 30+ years in the foodservice industry. Based in North Texas, he designs, coordinates, and oversees projects for his team across the region.",
-    },
-    // Placeholders — replace name/title/photo as real staff are added.
-    { name: "[Team member 03]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 04]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 05]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 06]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 07]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 08]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 09]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 10]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 11]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 12]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 13]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 14]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 15]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 16]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 17]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 18]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 19]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 20]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 21]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 22]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 23]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 24]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 25]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 26]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 27]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 28]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 29]", title: "[Title]", photo: null, placeholder: true },
-    { name: "[Team member 30]", title: "[Title]", photo: null, placeholder: true },
+    // Principals
+    { name: "Melissa Moore, FCSI", title: "Chief Executive Officer", location: "Houston", lead: true, photo: null },
+    { name: "Lance Brooks, FCSI", title: "President", location: "Dallas", lead: true, photo: null },
+    // Dallas
+    { name: "Christina MacMicken", title: "CA Manager", location: "Dallas", photo: null },
+    { name: "Sherri Myers", title: "Project Manager", location: "Dallas", photo: null },
+    { name: "John Imes", title: "Project Manager", location: "Dallas", photo: null },
+    { name: "Trey Rieper", title: "Project Manager", location: "Dallas", photo: null },
+    { name: "Ray Kanjia", title: "Project Manager", location: "Dallas", photo: null },
+    { name: "Ling Weng", title: "Project Manager", location: "Dallas", photo: null },
+    { name: "Nate Cummins", title: "APM / CA", location: "Dallas", photo: null },
+    { name: "Charles Scott", title: "Engineer", location: "Dallas", photo: null },
+    { name: "Tyler Carniglia", title: "Engineer", location: "Dallas", photo: null },
+    { name: "Alex Ortega", title: "Engineer", location: "Dallas", photo: null },
+    { name: "Michelle Lloyd", title: "Bookkeeper / Receivables", location: "Dallas", photo: null },
+    // Houston
+    { name: "Stephen Trawnik", title: "CA Manager", location: "Houston", photo: null },
+    { name: "Nick Caldwell", title: "Project Manager", location: "Houston", photo: null },
+    { name: "Duane Mikkelson", title: "Project Manager", location: "Houston", photo: null },
+    { name: "Linda Roe", title: "Project Manager", location: "Houston", photo: null },
+    { name: "Vernon Sanford", title: "Project Manager", location: "Houston", photo: null },
+    { name: "Kevin Sprague", title: "Project Manager", location: "Houston", photo: null },
+    { name: "Joel Castaneda", title: "Project Manager", location: "Houston", photo: null },
+    { name: "Jeff Pinkham", title: "Engineer", location: "Houston", photo: null },
+    { name: "Aaron Zappas", title: "Engineer", location: "Houston", photo: null },
+    { name: "Korey Krause", title: "Engineer", location: "Houston", photo: null },
+    { name: "Graeme Morrison", title: "Engineer", location: "Houston", photo: null },
+    { name: "Mercedes Dishaw", title: "Executive Assistant / APM", location: "Houston", photo: null },
+    { name: "Susan Little", title: "Accounting / HR Manager", location: "Houston", photo: null },
+    { name: "Karrie Dossey", title: "Health Dept. Processor", location: "Houston", photo: null },
   ] as TeamMember[],
 };
 
