@@ -256,7 +256,10 @@ const isActive = (href: string) =>
         .nav-burger span{transition:none}
       }
       @media (max-width:860px){
-        .nav-link,.nav-cta{display:none}
+        /* Hide the whole desktop nav (links, the Who We Are dropdown, and CTA);
+           the burger + mobile menu take over. Hiding .nav-link alone left the
+           dropdown's link visible via its higher-specificity rule. */
+        .nav{display:none}
         .nav-burger{display:flex}
         .header-inner{height:66px}
         .brand img{height:38px}
