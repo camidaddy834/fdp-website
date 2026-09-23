@@ -32,24 +32,24 @@ export const MISSION = {
 };
 
 /**
- * Company history — a 57+ year lineage the client wants to showcase, with
- * original drawings and media. ALL milestone copy below is PLACEHOLDER.
- * NOTE: the homepage/positioning currently says "Founded 1997"; the client
- * says 57+ years (≈1969). Confirm the real founding year and reconcile the two.
- * Archive images go in /public/history/ and get listed in `archive`.
+ * Company history — FDP's lineage traces to 1967 through three predecessor
+ * firms, merged and renamed FDP in 2022 (source: FDP Firm Profile). The client
+ * wants to showcase this history with original drawings and media: add files to
+ * /public/history/ and list them in `archive` (empty → branded placeholder tiles).
  */
 export const HISTORY = {
-  placeholder: true,
-  yearsLabel: "57+ years",
-  foundedYear: 1969, // VERIFY — conflicts with the "Founded 1997" stat elsewhere
+  placeholder: false,
+  yearsLabel: "Since 1967",
+  headline: "A legacy dating to 1967",
+  foundedYear: 1967,
   intro:
-    "For more than five decades, FDP has planned and designed foodservice facilities across the country. This is a placeholder history — replace with FDP's real story, milestones, and the original drawings and media the team wants to feature.",
+    "Foodservice Design Professionals is built on the combined experience of three respected foodservice consulting firms — H. G. Rice & Company, Blasdel & Associates, and Millunzi & Associates — with more than 100 years of combined expertise and roots reaching back to 1967.",
   milestones: [
-    { year: "1969", title: "The firm is founded", body: "Placeholder — the founding story: who started FDP, where, and the first projects on the board." },
-    { year: "1980s", title: "Growth across Texas", body: "Placeholder — expansion, notable early clients, and the practice's growing reputation." },
-    { year: "1997", title: "A new chapter", body: "Placeholder — reconcile with the '1997' founding date used elsewhere (LLC formation vs. firm origin?)." },
-    { year: "2010s", title: "Modern practice", body: "Placeholder — technology, BIM/CAD, and the shift to today's design approach." },
-    { year: "Today", title: "Dallas & Houston", body: "Placeholder — the practice now: two offices, ten markets, and decades of built work." },
+    { year: "1967", title: "H. G. Rice & Company", body: "The oldest of FDP's founding firms is established, beginning a legacy of foodservice consulting that carries through to today." },
+    { year: "1975", title: "Blasdel & Associates", body: "Blasdel & Associates, Inc. is founded, deepening the expertise that would later come together under FDP." },
+    { year: "1997", title: "Millunzi & Associates", body: "Millunzi & Associates, Inc. is established — the third firm in FDP's lineage." },
+    { year: "2022", title: "Foodservice Design Professionals", body: "CEO Melissa Moore, FCSI, and President Lance Brooks acquire Millunzi & Associates and rename the firm Foodservice Design Professionals, LLC — uniting 100+ years of combined foodservice excellence." },
+    { year: "Today", title: "Dallas & Houston", body: "FDP designs foodservice facilities across the United States and internationally from two Texas offices, carrying that legacy forward." },
   ],
   // Original drawings & media. Add files to /public/history/ and list them here.
   // Empty for now → the page shows branded placeholder tiles.
@@ -150,11 +150,11 @@ export const CAPABILITIES = {
   differentiators: [
     "Certified WBE, WOSB, SBA, SBE, SDB & HUB.",
     "Cutting-edge tools — Revit, 3D rendering, and VR technology.",
-    "Diverse market experience, nationally and internationally, since 1997.",
+    "Diverse market experience, nationally and internationally, since 1967.",
   ],
   snapshot: [
     { label: "Business Name", value: "Foodservice Design Professionals LLC" },
-    { label: "Founded", value: "1997" },
+    { label: "Legacy since", value: "1967" },
     { label: "DUNS", value: "02153580" },
     { label: "UEID", value: "QUNELMMQ2SN9" },
     { label: "CAGE", value: "7YWH3" },

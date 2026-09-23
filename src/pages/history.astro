@@ -3,20 +3,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { HISTORY } from "../data/company";
 import { SITE } from "../data/site";
 
-const { intro, milestones, archive, yearsLabel } = HISTORY;
+const { intro, milestones, archive, headline } = HISTORY;
 // Show real archive media if provided; otherwise render placeholder tiles.
 const archiveTiles = archive.length > 0 ? archive : Array.from({ length: 6 });
 ---
 
 <BaseLayout
   title="History"
-  description={`${yearsLabel} of foodservice facility design — the story of FDP, with original drawings and media from the archive.`}
+  description={`${headline} — the story of FDP, built on 100+ years of combined foodservice design experience across three predecessor firms.`}
 >
   <section class="page-head">
     <div class="container">
       <p class="crumb"><a href="/about">Who We Are</a> <span>/</span> History</p>
       <p class="eyebrow">Our History</p>
-      <h1 class="page-title">{yearsLabel} of foodservice design</h1>
+      <h1 class="page-title">{headline}</h1>
       <p class="page-lede">{intro}</p>
       {HISTORY.placeholder && (
         <p class="ph-flag" style="margin-top:22px">
@@ -55,7 +55,7 @@ const archiveTiles = archive.length > 0 ? archive : Array.from({ length: 6 });
         </div>
       </div>
       <p class="archive-note">
-        Decades of original drawings, plans, and photography. Add scans to
+        Decades of original drawings, plans, and photography. Add scans to{" "}
         <code>/public/history/</code> and they'll appear here.
       </p>
       <div class="archive-grid">
@@ -82,9 +82,9 @@ const archiveTiles = archive.length > 0 ? archive : Array.from({ length: 6 });
     <div class="container cta-inner">
       <div>
         <p class="eyebrow on-dark">Carrying it forward</p>
-        <h2 class="cta-title">Five decades of built work — and counting.</h2>
+        <h2 class="cta-title">Nearly six decades of built work — and counting.</h2>
         <p class="cta-lede">
-          Have a facility on the drawing board? Proposals go to
+          Have a facility on the drawing board? Proposals go to{" "}
           <a href={`mailto:${SITE.proposalEmail}`}>{SITE.proposalEmail}</a>.
         </p>
       </div>
