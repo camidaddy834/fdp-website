@@ -120,3 +120,7 @@ p{margin:0}
 /* ---- Utility ---- */
 .tabular{font-variant-numeric:tabular-nums}
 .eyebrow-plain{font-family:var(--font-mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+/* Hide the Netlify-injected "Powered by Netlify" badge (HUD). Netlify adds this
+   at the edge, not in our source. Revisit via the Netlify dashboard toggle. */
+#nl-badge-frame,#nl-badge{display:none !important}
