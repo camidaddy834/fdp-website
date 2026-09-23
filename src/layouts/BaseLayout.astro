@@ -228,13 +228,16 @@ const isActive = (href: string) =>
       .nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
       .mobile-menu{
-        display:flex;flex-direction:column;gap:2px;
-        padding:10px clamp(18px,4vw,40px) 20px;
+        position:absolute;top:100%;left:0;right:0;
+        display:flex;flex-direction:column;gap:0;
+        padding:4px clamp(18px,4vw,40px) 16px;
         border-top:1px solid var(--line);background:var(--paper);
+        box-shadow:0 16px 28px -14px rgba(20,25,32,.28);
+        max-height:calc(100dvh - 64px);overflow-y:auto;overscroll-behavior:contain;
       }
       .mobile-link{
-        font-family:var(--font-display);font-weight:600;font-size:1.05rem;text-decoration:none;
-        color:var(--ink-soft);padding:13px 4px;border-bottom:1px solid var(--line);
+        font-family:var(--font-display);font-weight:600;font-size:1rem;text-decoration:none;
+        color:var(--ink-soft);padding:11px 4px;border-bottom:1px solid var(--line);
       }
       .mobile-link.active{color:var(--accent-ink)}
       .mobile-sublink{
