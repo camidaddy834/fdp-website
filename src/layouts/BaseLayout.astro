@@ -235,6 +235,9 @@ const isActive = (href: string) =>
         box-shadow:0 16px 28px -14px rgba(20,25,32,.28);
         max-height:calc(100dvh - 64px);overflow-y:auto;overscroll-behavior:contain;
       }
+      /* `.mobile-menu{display:flex}` would otherwise override the [hidden]
+         attribute the burger toggles, leaving the menu always open. */
+      .mobile-menu[hidden]{display:none}
       .mobile-link{
         font-family:var(--font-display);font-weight:600;font-size:1rem;text-decoration:none;
         color:var(--ink-soft);padding:11px 4px;border-bottom:1px solid var(--line);
