@@ -1,0 +1,31 @@
+# slug  degrees-clockwise   (applied by scripts/history-media.sh)
+# These archive scans came in rotated 90 CW; only these four were already upright:
+#   20250815211924-0001a, 20250815212028-0001a, 20250815212645-0001a, 20250815213019-0001a
+20250815213254-0001a 90
+20250815213753-0001a 90
+20250815213950-0001a 90
+20250815214047-0001a 90
+20250815214220-0001a 90
+20250815214801-0001a 90
+hgr-archive000001 90
+hgr-archive000002 90
+hgr-archive000004 90
+hgr-archive000005 90
+hgr-archive000006 90
+hgr-archive000007 90
+hgr-archive000008 90
+hgr-archive000009 90
+hgr-archive000010 90
+hgr-archive000011 90
+hgr-archive000012 90
+hgr-archive000013 90
+hgr-archive000014 90
+hgr-archive000015 90
+hgr-archive000016 90
+hgr-archive000017 90
+hgr-archive000018 90
+hgr-archive000019 90
+hgr-archive000020 90
+hgr-archive000021 90
+hgr-archive000022 90
+hgr-archive000023 90

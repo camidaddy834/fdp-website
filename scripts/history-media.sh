@@ -18,7 +18,11 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SRC="$root/history-originals"
 OUT="$root/public/history"
 THUMB="$OUT/thumbs"
+ROT="$root/scripts/history-rotations.txt"   # lines: "<slug> <degrees-clockwise>"
 mkdir -p "$OUT" "$THUMB"
+
+# Degrees of clockwise rotation to correct a given slug (blank = none).
+get_rot() { [ -f "$ROT" ] && awk -v s="$1" '$1==s{print $2; exit}' "$ROT"; }
 
 if [ ! -d "$SRC" ] || [ -z "$(ls -A "$SRC" 2>/dev/null)" ]; then
   echo "No source scans in history-originals/ — nothing to build."
@@ -45,6 +49,9 @@ for f in "$SRC"/*.jpg "$SRC"/*.jpeg "$SRC"/*.png "$SRC"/*.pdf; do
   [ -f "$src" ] || { echo "  ! could not render $bn — skipped"; continue; }
 
   sips -Z 2600 -s format jpeg -s formatOptions 72 "$src" --out "$OUT/$slug.jpg" >/dev/null 2>&1
+  deg="$(get_rot "$slug")"
+  [ -n "$deg" ] && sips -r "$deg" "$OUT/$slug.jpg" >/dev/null 2>&1
+  # thumbnail is generated from the (already-rotated) full view
   sips -Z 1000 -s format jpeg -s formatOptions 60 "$OUT/$slug.jpg" --out "$THUMB/$slug.jpg" >/dev/null 2>&1
   count=$((count+1))
 done
