@@ -32,6 +32,31 @@ export const MISSION = {
 };
 
 /**
+ * Company history — a 57+ year lineage the client wants to showcase, with
+ * original drawings and media. ALL milestone copy below is PLACEHOLDER.
+ * NOTE: the homepage/positioning currently says "Founded 1997"; the client
+ * says 57+ years (≈1969). Confirm the real founding year and reconcile the two.
+ * Archive images go in /public/history/ and get listed in `archive`.
+ */
+export const HISTORY = {
+  placeholder: true,
+  yearsLabel: "57+ years",
+  foundedYear: 1969, // VERIFY — conflicts with the "Founded 1997" stat elsewhere
+  intro:
+    "For more than five decades, FDP has planned and designed foodservice facilities across the country. This is a placeholder history — replace with FDP's real story, milestones, and the original drawings and media the team wants to feature.",
+  milestones: [
+    { year: "1969", title: "The firm is founded", body: "Placeholder — the founding story: who started FDP, where, and the first projects on the board." },
+    { year: "1980s", title: "Growth across Texas", body: "Placeholder — expansion, notable early clients, and the practice's growing reputation." },
+    { year: "1997", title: "A new chapter", body: "Placeholder — reconcile with the '1997' founding date used elsewhere (LLC formation vs. firm origin?)." },
+    { year: "2010s", title: "Modern practice", body: "Placeholder — technology, BIM/CAD, and the shift to today's design approach." },
+    { year: "Today", title: "Dallas & Houston", body: "Placeholder — the practice now: two offices, ten markets, and decades of built work." },
+  ],
+  // Original drawings & media. Add files to /public/history/ and list them here.
+  // Empty for now → the page shows branded placeholder tiles.
+  archive: [] as { src: string; caption: string }[],
+};
+
+/**
  * Certifications & affiliations. These are EXAMPLES of the kinds of
  * credentials a firm like FDP might hold — replace every entry with
  * FDP's actual certifications (and add logo files to /public/certs/).

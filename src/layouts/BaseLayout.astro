@@ -54,14 +54,39 @@ const isActive = (href: string) =>
         </a>
         <nav class="nav" aria-label="Primary">
           {
-            NAV.map((item) => (
-              <a
-                href={item.href}
-                class:list={["nav-link", { active: isActive(item.href) }]}
-              >
-                {item.label}
-              </a>
-            ))
+            NAV.map((item) => {
+              const active =
+                isActive(item.href) ||
+                (item.children?.some((c) => isActive(c.href)) ?? false);
+              return item.children ? (
+                <div class="nav-item">
+                  <a
+                    href={item.href}
+                    class:list={["nav-link", { active }]}
+                    aria-haspopup="true"
+                  >
+                    {item.label}
+                    <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true">
+                      <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </a>
+                  <div class="nav-sub">
+                    {item.children.map((c) => (
+                      <a
+                        href={c.href}
+                        class:list={["nav-sublink", { active: isActive(c.href) }]}
+                      >
+                        {c.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <a href={item.href} class:list={["nav-link", { active }]}>
+                  {item.label}
+                </a>
+              );
+            })
           }
           <a href="/contact" class="btn btn-primary nav-cta">Request a Proposal</a>
         </nav>
@@ -77,12 +102,22 @@ const isActive = (href: string) =>
       <div id="mobile-menu" class="mobile-menu" hidden>
         {
           NAV.map((item) => (
-            <a
-              href={item.href}
-              class:list={["mobile-link", { active: isActive(item.href) }]}
-            >
-              {item.label}
-            </a>
+            <>
+              <a
+                href={item.href}
+                class:list={["mobile-link", { active: isActive(item.href) }]}
+              >
+                {item.label}
+              </a>
+              {item.children?.map((c) => (
+                <a
+                  href={c.href}
+                  class:list={["mobile-link", "mobile-sublink", { active: isActive(c.href) }]}
+                >
+                  {c.label}
+                </a>
+              ))}
+            </>
           ))
         }
         <a href="/contact" class="btn btn-primary mobile-cta">Request a Proposal</a>
@@ -152,6 +187,35 @@ const isActive = (href: string) =>
       }
       .nav-cta{padding:10px 18px}
 
+      /* Dropdown submenu (desktop) */
+      .nav-item{position:relative;display:flex;align-items:center}
+      .nav-item > .nav-link{display:inline-flex;align-items:center;gap:5px}
+      .nav-caret{width:9px;height:6px;opacity:.65;transition:transform .18s ease}
+      .nav-item:hover .nav-caret,.nav-item:focus-within .nav-caret{transform:rotate(180deg)}
+      .nav-sub{
+        position:absolute;top:calc(100% + 10px);left:50%;
+        transform:translateX(-50%) translateY(-6px);
+        min-width:190px;display:flex;flex-direction:column;
+        background:var(--paper);border:1px solid var(--line);border-radius:12px;
+        box-shadow:var(--shadow);padding:6px;
+        opacity:0;visibility:hidden;transition:opacity .16s ease, transform .16s ease;z-index:60;
+      }
+      /* invisible bridge so the pointer can travel from link to panel */
+      .nav-sub::before{content:"";position:absolute;top:-12px;left:0;right:0;height:12px}
+      .nav-item:hover .nav-sub,.nav-item:focus-within .nav-sub{
+        opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);
+      }
+      .nav-sublink{
+        font-family:var(--font-display);font-weight:600;font-size:.92rem;text-decoration:none;
+        color:var(--ink-soft);padding:9px 12px;border-radius:8px;white-space:nowrap;
+        transition:background .12s ease, color .12s ease;
+      }
+      .nav-sublink:hover{background:var(--accent-wash);color:var(--accent-ink)}
+      .nav-sublink.active{color:var(--accent-ink);background:var(--accent-wash)}
+      @media (prefers-reduced-motion:reduce){
+        .nav-caret,.nav-sub{transition:none}
+      }
+
       /* Hamburger — hidden on desktop */
       .nav-burger{
         display:none;flex-direction:column;justify-content:center;gap:5px;
@@ -173,6 +237,13 @@ const isActive = (href: string) =>
         color:var(--ink-soft);padding:13px 4px;border-bottom:1px solid var(--line);
       }
       .mobile-link.active{color:var(--accent-ink)}
+      .mobile-sublink{
+        font-size:.98rem;padding-left:20px;color:var(--muted);
+      }
+      .mobile-sublink::before{
+        content:"";display:inline-block;width:12px;height:1px;background:var(--line-strong);
+        vertical-align:middle;margin-right:10px;
+      }
       .mobile-cta{margin-top:14px;justify-content:center}
 
       @media (prefers-reduced-motion:reduce){

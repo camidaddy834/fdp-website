@@ -1,0 +1,158 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { HISTORY } from "../data/company";
+import { SITE } from "../data/site";
+
+const { intro, milestones, archive, yearsLabel } = HISTORY;
+// Show real archive media if provided; otherwise render placeholder tiles.
+const archiveTiles = archive.length > 0 ? archive : Array.from({ length: 6 });
+---
+
+<BaseLayout
+  title="History"
+  description={`${yearsLabel} of foodservice facility design — the story of FDP, with original drawings and media from the archive.`}
+>
+  <section class="page-head">
+    <div class="container">
+      <p class="crumb"><a href="/about">Who We Are</a> <span>/</span> History</p>
+      <p class="eyebrow">Our History</p>
+      <h1 class="page-title">{yearsLabel} of foodservice design</h1>
+      <p class="page-lede">{intro}</p>
+      {HISTORY.placeholder && (
+        <p class="ph-flag" style="margin-top:22px">
+          Placeholder — replace with FDP's real history, dates, and archive images
+        </p>
+      )}
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="section-tight">
+    <div class="container">
+      <ol class="timeline">
+        {
+          milestones.map((m) => (
+            <li class="tl-item">
+              <div class="tl-year tabular">{m.year}</div>
+              <div class="tl-body">
+                <h2 class="tl-title">{m.title}</h2>
+                <p class="tl-text">{m.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Archive -->
+  <section class="section-tight archive">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">From the archive</p>
+          <h2 class="sec-title">Original drawings &amp; media</h2>
+        </div>
+      </div>
+      <p class="archive-note">
+        Decades of original drawings, plans, and photography. Add scans to
+        <code>/public/history/</code> and they'll appear here.
+      </p>
+      <div class="archive-grid">
+        {
+          archiveTiles.map((item: any) =>
+            item?.src ? (
+              <figure class="arch">
+                <img src={item.src} alt={item.caption} loading="lazy" />
+                <figcaption>{item.caption}</figcaption>
+              </figure>
+            ) : (
+              <div class="arch arch-ph" aria-hidden="true">
+                <span class="arch-mark">FDP</span>
+              </div>
+            ),
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container cta-inner">
+      <div>
+        <p class="eyebrow on-dark">Carrying it forward</p>
+        <h2 class="cta-title">Five decades of built work — and counting.</h2>
+        <p class="cta-lede">
+          Have a facility on the drawing board? Proposals go to
+          <a href={`mailto:${SITE.proposalEmail}`}>{SITE.proposalEmail}</a>.
+        </p>
+      </div>
+      <a href="/contact" class="btn btn-primary cta-btn">Request a proposal</a>
+    </div>
+  </section>
+
+  <style>
+    .page-head{padding:clamp(48px,7vw,86px) 0 10px}
+    .crumb{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+    .crumb a{color:var(--accent-ink);text-decoration:none}
+    .crumb a:hover{text-decoration:underline}
+    .crumb span{margin:0 6px;opacity:.5}
+    .page-title{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;margin:14px 0 16px}
+    .page-lede{color:var(--ink-soft);max-width:60ch;font-size:1.1rem}
+
+    /* Timeline */
+    .timeline{list-style:none;margin:0;padding:0;max-width:760px}
+    .tl-item{
+      display:grid;grid-template-columns:120px 1fr;gap:clamp(18px,3vw,36px);
+      padding:26px 0;border-top:1px solid var(--line);position:relative;
+    }
+    .tl-item:first-child{border-top:none}
+    .tl-year{
+      font-family:var(--font-display);font-weight:800;font-size:1.35rem;color:var(--accent);
+      position:relative;padding-left:20px;
+    }
+    .tl-year::before{
+      content:"";position:absolute;left:0;top:.4em;width:9px;height:9px;border-radius:50%;
+      background:var(--accent);
+    }
+    .tl-title{font-family:var(--font-display);font-weight:700;font-size:1.2rem;margin:0 0 6px}
+    .tl-text{color:var(--ink-soft);font-size:1rem;line-height:1.6;max-width:52ch}
+
+    /* Archive */
+    .sec-head{margin-bottom:14px}
+    .sec-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin-top:4px}
+    .archive-note{color:var(--ink-soft);max-width:56ch;margin-bottom:26px}
+    .archive-note code{font-family:var(--font-mono);font-size:.85em;background:var(--steel-wash);padding:2px 6px;border-radius:5px}
+    .archive-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .arch{margin:0;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);background:var(--paper)}
+    .arch img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+    .arch figcaption{padding:12px 14px;font-size:.9rem;color:var(--ink-soft)}
+    .arch-ph{
+      aspect-ratio:4/3;display:grid;place-items:center;
+      background:
+        radial-gradient(120% 120% at 30% 20%, #2c4d84 0%, transparent 55%),
+        radial-gradient(120% 120% at 80% 90%, #9aa3b3 0%, transparent 60%),
+        var(--ink-900);
+    }
+    .arch-mark{font-family:var(--font-display);font-weight:800;font-size:1.7rem;letter-spacing:.12em;color:rgba(255,255,255,.26)}
+
+    /* CTA (mirrors the homepage CTA) */
+    .cta{background:var(--ink-900);color:#fff;margin-top:clamp(40px,6vw,72px)}
+    .cta-inner{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:clamp(44px,6vw,72px) 0;flex-wrap:wrap}
+    .cta-title{font-size:clamp(1.7rem,3.2vw,2.4rem);font-weight:800;color:#fff;max-width:20ch}
+    .cta-lede{color:#b8c0c8;margin-top:10px;max-width:44ch}
+    .cta-lede a{color:var(--on-dark-accent)}
+    .cta-btn{background:#fff;color:var(--accent)}
+    .cta-btn:hover{background:var(--steel-wash)}
+
+    @media (max-width:760px){
+      .tl-item{grid-template-columns:1fr;gap:8px}
+      .tl-year{padding-left:20px}
+      .archive-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:480px){
+      .archive-grid{grid-template-columns:1fr}
+    }
+  </style>
+</BaseLayout>

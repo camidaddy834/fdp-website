@@ -86,8 +86,21 @@ export const VERTICAL_META: Record<
   },
 };
 
-export const NAV = [
-  { label: "Who We Are", href: "/about" },
+export type NavItem = {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+};
+
+export const NAV: NavItem[] = [
+  {
+    label: "Who We Are",
+    href: "/about",
+    children: [
+      { label: "Overview", href: "/about" },
+      { label: "History", href: "/history" },
+    ],
+  },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Capabilities", href: "/capabilities" },
   { label: "Team", href: "/team" },
