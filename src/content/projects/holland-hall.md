@@ -3,7 +3,7 @@ title: "Holland Hall"
 client: "Holland Hall School"
 sector: "k-12"
 location: "Tulsa, OK"
-services: ["Foodservice Design", "Servery Design"]
+services: ["Food Service Design", "Servery Design"]
 summary: "A private school's refectory reimagined as a bright, modern lunchroom."
 heroImage: ../../assets/projects/holland-hall.png
 featured: true

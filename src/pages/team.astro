@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { TEAM } from "../data/company";
+import { TEAM, TEAM_GROUPS } from "../data/company";
 
 // Monogram initials from a member name (drops any credential after a comma)
 function initials(name: string): string {
@@ -9,23 +9,32 @@ function initials(name: string): string {
   return (parts[0][0] + (parts[1]?.[0] ?? "")).toUpperCase();
 }
 
+// Last name for alphabetical sorting (drops any credential after a comma)
+function lastName(name: string): string {
+  const parts = name.split(",")[0].trim().split(/\s+/);
+  return parts[parts.length - 1] ?? name;
+}
+
 const leads = TEAM.members.filter((m) => m.lead);
-const OFFICES = ["Dallas", "Houston"] as const;
-const teamByOffice = OFFICES.map((office) => ({
-  office,
-  members: TEAM.members.filter((m) => !m.lead && m.location === office),
+// All other groups, in display order, alphabetical by last name within each
+const groups = TEAM_GROUPS.filter((g) => g !== "Leadership").map((group) => ({
+  group,
+  members: TEAM.members
+    .filter((m) => m.group === group)
+    .sort((a, b) => lastName(a.name).localeCompare(lastName(b.name))),
 }));
 ---
 
-<BaseLayout title="Team" description="Meet the foodservice designers, project managers, and specialists behind FDP.">
+<BaseLayout title="Team" description="Meet the food service designers, project managers, and specialists behind FDP.">
   <section class="page-head">
     <div class="container">
       <p class="eyebrow">Our Team</p>
-      <h1 class="page-title">The people behind the plans</h1>
+      <h1 class="page-title">Every project gets the whole team.</h1>
       <p class="page-lede">
-        Foodservice design is detail work, and it takes a team that has done it
-        many times over. Meet the principals who lead FDP &mdash; and the team
-        behind every project across our Dallas and Houston offices.
+        Food service design is detail work, and no great kitchen is designed by
+        one person. From leadership to project management, engineering, and
+        construction administration, every FDP project draws on the full depth
+        of our team.
       </p>
     </div>
   </section>
@@ -56,14 +65,13 @@ const teamByOffice = OFFICES.map((office) => ({
     </div>
   </section>
 
-  <!-- Team by office -->
+  <!-- Team grouped by discipline -->
   {
-    teamByOffice.map(({ office, members }) => (
+    groups.map(({ group, members }) => (
       <section class="section-tight office-section">
         <div class="container">
           <div class="office-head">
-            <p class="eyebrow">{office} office</p>
-            <span class="office-count tabular">{members.length} people</span>
+            <p class="eyebrow">{group}</p>
           </div>
           <div class="team-grid">
             {members.map((m) => (
@@ -91,7 +99,7 @@ const teamByOffice = OFFICES.map((office) => ({
         <p class="eyebrow on-dark">Careers</p>
         <h2 class="join-title">Interested in joining FDP?</h2>
         <p class="join-lede">
-          We're always glad to hear from foodservice designers and project
+          We're always glad to hear from food service designers and project
           managers who care about getting the details right.
         </p>
       </div>

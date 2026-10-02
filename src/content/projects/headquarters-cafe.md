@@ -7,7 +7,7 @@ location: "Houston, TX"
 year: 2023
 squareFeet: 16500
 seats: 420
-services: ["Foodservice Design", "Equipment Specification", "Kitchen Ventilation"]
+services: ["Food Service Design", "Equipment Specification", "Kitchen Ventilation"]
 summary: "An all-day employee café designed to pull staff out of their desks — a market, a grill, and a barista bar under one warm, daylit roof."
 featured: true
 order: 2

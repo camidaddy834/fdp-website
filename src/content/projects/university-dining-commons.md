@@ -7,7 +7,7 @@ location: "Dallas, TX"
 year: 2024
 squareFeet: 38000
 seats: 850
-services: ["Master Planning", "Foodservice Design", "Equipment Specification"]
+services: ["Master Planning", "Food Service Design", "Equipment Specification"]
 summary: "A residential dining hall reimagined as eight interactive micro-restaurants, doubling throughput at peak without expanding the footprint."
 featured: true
 order: 1

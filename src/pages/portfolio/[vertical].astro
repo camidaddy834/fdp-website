@@ -11,9 +11,14 @@ export function getStaticPaths() {
 
 const { vertical } = Astro.params;
 const meta = VERTICAL_META[vertical as (typeof VERTICALS)[number]];
-const projects = (await getCollection("projects"))
-  .filter((p) => !p.data.draft && p.data.sector === vertical)
+const all = (await getCollection("projects")).filter((p) => !p.data.draft);
+const projects = all
+  .filter((p) => p.data.sector === vertical)
   .sort((a, b) => a.data.order - b.data.order);
+// Only show sector chips that have projects (plus the current one).
+const sectorCounts = Object.fromEntries(
+  VERTICALS.map((v) => [v, all.filter((p) => p.data.sector === v).length]),
+);
 ---
 
 <BaseLayout title={meta.label} description={meta.blurb}>
@@ -25,7 +30,7 @@ const projects = (await getCollection("projects"))
       <div class="filters">
         <a href="/portfolio" class="chip">All</a>
         {
-          VERTICALS.map((v) => (
+          VERTICALS.filter((v) => sectorCounts[v] > 0 || v === vertical).map((v) => (
             <a
               href={`/portfolio/${v}/`}
               class:list={["chip", { "chip-active": v === vertical }]}

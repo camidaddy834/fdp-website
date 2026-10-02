@@ -3,7 +3,7 @@ title: "Northside High School Culinary Arts Facility"
 client: "Fort Worth ISD"
 sector: "k-12"
 location: "Fort Worth, TX"
-services: ["Foodservice Design", "Teaching Kitchen Design", "Equipment Specification"]
+services: ["Food Service Design", "Teaching Kitchen Design", "Equipment Specification"]
 summary: "A state-of-the-art culinary arts teaching facility giving high-school students a professional-grade kitchen to learn in."
 heroImage: ../../assets/projects/northside-hs-culinary.png
 featured: false

@@ -26,7 +26,7 @@ client: "Client / owner name"
 year: 2025                            # Number, no quotes
 squareFeet: 12000                     # Number — shown as "12,000 sq ft" on the card
 seats: 300                            # Number — shown as "300 seats" if there's no squareFeet
-services: ["Foodservice Design", "Equipment Specification"]   # List of strings
+services: ["Food Service Design", "Equipment Specification"]   # List of strings
 
 # Hero + gallery images. Put image files in src/assets/projects/ and point to
 # them here. If you leave heroImage out, a branded FDP placeholder is shown —

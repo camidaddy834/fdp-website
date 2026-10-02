@@ -7,7 +7,7 @@ location: "Houston, TX"
 year: 2023
 squareFeet: 21000
 seats: 300
-services: ["Foodservice Design", "Equipment Specification", "Regulatory Compliance"]
+services: ["Food Service Design", "Equipment Specification", "Regulatory Compliance"]
 summary: "A room-service production kitchen and staff café built to hospital-grade standards — patient meals on demand, 24 hours a day."
 featured: true
 order: 4

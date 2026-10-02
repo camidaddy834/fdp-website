@@ -4,7 +4,7 @@ client: "Mercedes-Benz Financial Services"
 sector: "corporate"
 location: "North Fort Worth, TX"
 year: 2019
-services: ["Foodservice Design", "Corporate Dining", "Equipment Specification"]
+services: ["Food Service Design", "Corporate Dining", "Equipment Specification"]
 summary: "The employee café at the heart of Mercedes-Benz Financial Services' award-winning North Fort Worth campus."
 heroImage: ../../assets/projects/mercedes-benz-fs.jpg
 featured: true

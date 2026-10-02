@@ -7,7 +7,7 @@ location: "Dallas–Fort Worth, TX"
 year: 2024
 squareFeet: 24000
 seats: 600
-services: ["Master Planning", "Foodservice Design", "Concept Development"]
+services: ["Master Planning", "Food Service Design", "Concept Development"]
 summary: "Seven food-hall concepts and a central production kitchen engineered to feed a 24-hour gaming floor without a single closed hour."
 featured: false
 order: 3

@@ -14,20 +14,19 @@ const counts = Object.fromEntries(
 );
 ---
 
-<BaseLayout title="Portfolio" description="Foodservice design projects across higher education, corporate, casinos, culinary, healthcare, and K-12.">
+<BaseLayout title="Portfolio" description="Food service design projects across higher education, corporate, casinos, culinary, healthcare, and K-12.">
   <section class="page-head">
     <div class="container">
       <p class="eyebrow">Portfolio</p>
       <h1 class="page-title">Selected work</h1>
       <p class="page-lede">
-        Browse by sector, or scroll the full list below. Each project is a look
-        at how we solved a specific foodservice problem — from master plan to
-        equipment schedule.
+        Each project reflects the owner&rsquo;s unique needs. Browse by sector
+        to see how we met them.
       </p>
       <div class="filters">
         <a href="/portfolio" class="chip chip-active">All</a>
         {
-          VERTICALS.map((v) => (
+          VERTICALS.filter((v) => counts[v] > 0).map((v) => (
             <a href={`/portfolio/${v}/`} class="chip">
               {VERTICAL_META[v].label}
               <span class="chip-n tabular">{counts[v]}</span>

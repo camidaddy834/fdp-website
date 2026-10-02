@@ -10,7 +10,7 @@ const { title, description } = Astro.props;
 const fullTitle = title ? `${title} · ${SITE.short}` : `${SITE.name}`;
 const desc =
   description ??
-  "Foodservice Design Professionals plans and designs high-performing foodservice facilities for higher education, corporate, healthcare, casinos, culinary, and K-12 clients.";
+  "Foodservice Design Professionals plans and designs high-performing food service facilities for higher education, corporate, healthcare, casinos, culinary, and K-12 clients.";
 const path = Astro.url.pathname;
 const isActive = (href: string) =>
   href === "/" ? path === "/" : path.startsWith(href);

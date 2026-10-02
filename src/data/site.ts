@@ -3,7 +3,7 @@ import type { VERTICALS } from "../content.config";
 export const SITE = {
   name: "Foodservice Design Professionals",
   short: "FDP",
-  tagline: "Foodservice facility design & consulting",
+  tagline: "Food service facility design & consulting",
   proposalEmail: "proposal@fdp.org",
   // Cloudflare Web Analytics beacon token. Paste the token from your
   // Cloudflare Web Analytics site here; the beacon renders only when set.
@@ -37,7 +37,7 @@ export const VERTICAL_META: Record<
   government: {
     label: "Government",
     blurb:
-      "Foodservice for public agencies and civic facilities — built to code, budget, and public accountability.",
+      "Food service for public agencies and civic facilities — built to code, budget, and public accountability.",
   },
   corporate: {
     label: "Corporate",
@@ -47,7 +47,7 @@ export const VERTICAL_META: Record<
   "health-care": {
     label: "Health Care",
     blurb:
-      "Patient-first foodservice and staff dining that meet demanding clinical standards.",
+      "Patient-first food service and staff dining that meet demanding clinical standards.",
   },
   hospitality: {
     label: "Hospitality",
@@ -72,7 +72,7 @@ export const VERTICAL_META: Record<
   retail: {
     label: "Retail",
     blurb:
-      "Grocery, market, and grab-and-go foodservice designed for throughput and freshness.",
+      "Grocery, market, and grab-and-go food service designed for throughput and freshness.",
   },
   correctional: {
     label: "Correctional",
