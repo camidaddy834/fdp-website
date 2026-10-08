@@ -57,6 +57,20 @@ body{
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
+/* Faint heritage watermark — a zoomed H. G. Rice archival drawing, fixed
+   behind all content. Kept very light so it reads as texture, not image. */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:url('/bg-drawing.webp') center center / cover no-repeat;
+  opacity:.045;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) body::before{opacity:.1;filter:invert(1)}
+}
 
 img{max-width:100%;display:block}
 a{color:inherit}
