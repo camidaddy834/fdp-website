@@ -209,7 +209,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Kirsten Reitzammer, MS, RD",
     title: "Director of Student Nutrition",
     org: "Allen ISD",
-    logo: null,
+    logo: "/testimonials/allen.png",
     approved: true,
   },
   {
@@ -218,7 +218,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Aaron Wylie",
     title: "Child Nutrition Director",
     org: "Eagle Mountain-Saginaw ISD",
-    logo: null,
+    logo: "/testimonials/eagle-mountain-saginaw.png",
     approved: true,
   },
   {
@@ -227,7 +227,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Julie Telesca",
     title: "Nutrition Services Director",
     org: "GCISD",
-    logo: null,
+    logo: "/testimonials/gcisd.png",
     approved: true,
   },
   {
@@ -236,7 +236,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "James Oates",
     title: "Assistant Director of Equipment and Warehouse Operations",
     org: "Garland ISD",
-    logo: null,
+    logo: "/testimonials/garland.png",
     approved: true,
   },
   {
@@ -245,7 +245,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Liz Raftery",
     title: "Director",
     org: "Denton ISD",
-    logo: null, // NO LOGO — per her preference; do not display a logo
+    logo: null, // NO LOGO — Denton per director preference (doc). Guidelines PDF received 11/6 but HELD pending Charlie's confirmation; do not display.
     approved: true,
   },
   {
@@ -254,7 +254,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Eric Lozano",
     title: "Director of Child Nutrition",
     org: "Coppell ISD",
-    logo: null, // NO LOGO — Coppell ISD logo NOT approved; do not use
+    logo: null, // NO LOGO — Coppell logo was NOT approved (doc). A Coppell logo file arrived 11/6 but is HELD pending Charlie's confirmation that it's now cleared; do not display.
     approved: true,
   },
   {
@@ -263,7 +263,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Audrey Roberts",
     title: "Director of Child Nutrition",
     org: "Sanger ISD",
-    logo: null,
+    logo: "/testimonials/sanger.png",
     approved: true,
   },
   // Frisco ISD (John Lara) WITHDRAWN 10/29 per district policy — must not be published.
