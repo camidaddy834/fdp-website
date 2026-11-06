@@ -239,14 +239,33 @@ export const TESTIMONIALS: Testimonial[] = [
     logo: null,
     approved: true,
   },
-  // PENDING — do not publish until confirmed (awaiting Lisa Jenkins’ confirmation).
   {
     quote:
-      "Foodservice Design Professionals has been an outstanding partner to Frisco ISD in planning and designing our new school construction projects. Their team takes the time to understand the operational needs of our Child Nutrition Program and translates them into creative, functional kitchen designs. They think beyond the traditional layout, bringing ideas that improve workflow, maximize space and create an ergonomic environment for our staff – from receiving and storage through prep, cooking, serving, ware washing and sanitation. They listen to our staff, ask the right questions, and make recommendations that support both current operations and future growth. We appreciate FDP’s professionalism, creativity and responsiveness in helping us build school kitchens that are safe, efficient and designed around the people who use them every day.",
-    name: "John Lara",
-    title: "Operations Coordinator",
-    org: "Frisco ISD",
-    logo: null,
-    approved: false,
+      "We’ve had the pleasure of partnering with FDP for more than a decade, and they have consistently provided excellent customer service and expert guidance. From equipment replacements and serving line upgrades to kitchen design for new school construction, FDP has been a trusted partner on projects of every size. They’re responsive, help us problem-solve equipment issues and stay current on the newest kitchen equipment and technology. We’ve been very pleased with the outcome of every project and truly value FDP’s expertise, responsiveness and commitment to our success.",
+    name: "Liz Raftery",
+    title: "Director",
+    org: "Denton ISD",
+    logo: null, // NO LOGO — per her preference; do not display a logo
+    approved: true,
   },
+  {
+    quote:
+      "I’ve worked with FDP for more than 10 years on kitchen renovations, walk-in cooler and freezer replacements, large equipment replacements and other major kitchen improvements. FDP is involved in every aspect of planning and design – from site visits and working directly with our staff on equipment needs to developing specifications and schematics for contractors. Their recommendations have helped us improve efficiency, enhance our kitchen environments, and serve our students higher-quality food. I would highly recommend FDP. Their expertise makes a real difference in the efficiency of your operation, the quality of your food and the overall function of your kitchens.",
+    name: "Eric Lozano",
+    title: "Director of Child Nutrition",
+    org: "Coppell ISD",
+    logo: null, // NO LOGO — Coppell ISD logo NOT approved; do not use
+    approved: true,
+  },
+  {
+    quote:
+      "I’ve worked with Lance for more than 10 years – four and a half years in Denton and six in Sanger – designing kitchens for new schools and renovating existing ones. With his experience and our history, his first drawings usually already capture what we’re looking for, so it’s minor tweaks, not major changes. I love his creativity. He thinks outside the box to make kitchens high-end and visually appealing, and he always knows the latest equipment – things you didn’t even know existed. He’s also very intentional about kitchen flow, lining up stations with the storage they rely on, so the work is easy and convenient for our staff. Opening a new school can be stressful, but working with Lance and his team – professional, but still fun – makes that part easy. On every project, from beginning to end, they’ve exceeded expectations. I would highly recommend FDP.",
+    name: "Audrey Roberts",
+    title: "Director of Child Nutrition",
+    org: "Sanger ISD",
+    logo: null,
+    approved: true,
+  },
+  // Frisco ISD (John Lara) WITHDRAWN 10/29 per district policy — must not be published.
+  // Midland ISD (Michelle Helms) in progress — not approved yet.
 ];
