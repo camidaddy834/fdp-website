@@ -186,3 +186,67 @@ export const CAPABILITIES = {
   ],
   pdfPath: "/fdp-capabilities-statement.pdf",
 };
+
+/**
+ * Client testimonials (source: FDP_Website_Testimonials.docx, prepared by
+ * Chavon Cotton). Publish ONLY entries with approved: true — quotes and
+ * attributions must be used exactly as written. Logos (logo: path into
+ * /public/testimonials/) can be added later; a text org label shows meanwhile.
+ */
+export interface Testimonial {
+  quote: string;
+  name: string;
+  title: string;
+  org: string;
+  logo?: string | null;
+  approved: boolean;
+}
+
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    quote:
+      "Allen ISD has worked with FDP for close to 20 years, and I’ve personally worked with them for the past five. It’s hard to find designers who combine years of experience, an understanding of the inner workings of school business, and customer service that exceeds expectations. Renovations can be stressful, but FDP works hard to make sure your vision comes to life and that the end product is something you’ll use and appreciate for years to come.",
+    name: "Kirsten Reitzammer, MS, RD",
+    title: "Director of Student Nutrition",
+    org: "Allen ISD",
+    logo: null,
+    approved: true,
+  },
+  {
+    quote:
+      "For more than 14 years, FDP has partnered with us on six new schools, two bistros, a warehouse and multiple equipment projects. They take great pride in their work – they’re prepared before a new build or equipment project begins, and they’re there afterward to make sure everything was done right. FDP communicates and coordinates with our architects and contractors, which frees me to focus on the success of our Child Nutrition Program. If you want a no-hassle project or new build, give FDP a shot. You won’t be disappointed.",
+    name: "Aaron Wylie",
+    title: "Child Nutrition Director",
+    org: "Eagle Mountain-Saginaw ISD",
+    logo: null,
+    approved: true,
+  },
+  {
+    quote:
+      "Lance and the FDP team know kitchen design inside and out, along with the equipment brands that truly meet the needs of each campus. Whatever the challenge, I can count on FDP to find a solution or create a design that works.",
+    name: "Julie Telesca",
+    title: "Nutrition Services Director",
+    org: "GCISD",
+    logo: null,
+    approved: true,
+  },
+  {
+    quote:
+      "Working with Lance and the FDP team has been refreshing. Before our bond projects began, they took the time to understand our wants and needs for a successful outcome. Through challenging construction projects funded by our recent bond, having FDP in our corner made sure our voice was heard – they clearly communicated our needs to the architects on our Lakeview Centennial High School kitchen and servery project. After more than four years with Lance and the team, I look forward to many more projects together.",
+    name: "James Oates",
+    title: "Assistant Director of Equipment and Warehouse Operations",
+    org: "Garland ISD",
+    logo: null,
+    approved: true,
+  },
+  // PENDING — do not publish until confirmed (awaiting Lisa Jenkins’ confirmation).
+  {
+    quote:
+      "Foodservice Design Professionals has been an outstanding partner to Frisco ISD in planning and designing our new school construction projects. Their team takes the time to understand the operational needs of our Child Nutrition Program and translates them into creative, functional kitchen designs. They think beyond the traditional layout, bringing ideas that improve workflow, maximize space and create an ergonomic environment for our staff – from receiving and storage through prep, cooking, serving, ware washing and sanitation. They listen to our staff, ask the right questions, and make recommendations that support both current operations and future growth. We appreciate FDP’s professionalism, creativity and responsiveness in helping us build school kitchens that are safe, efficient and designed around the people who use them every day.",
+    name: "John Lara",
+    title: "Operations Coordinator",
+    org: "Frisco ISD",
+    logo: null,
+    approved: false,
+  },
+];

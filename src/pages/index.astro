@@ -4,12 +4,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import { VERTICAL_META, SITE } from "../data/site";
 import { VERTICALS } from "../content.config";
+import { TESTIMONIALS } from "../data/company";
 
 const projects = (await getCollection("projects")).filter((p) => !p.data.draft);
 const featured = projects
   .filter((p) => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
+
+// Only publish client-approved testimonials.
+const testimonials = TESTIMONIALS.filter((t) => t.approved);
 ---
 
 <BaseLayout
@@ -140,6 +144,34 @@ const featured = projects
     )
   }
 
+  <!-- Testimonials -->
+  {
+    testimonials.length > 0 && (
+      <section class="section-tight tmon">
+        <div class="container">
+          <div class="sec-head">
+            <div>
+              <p class="eyebrow">In their words</p>
+              <h2 class="sec-title">Trusted by school nutrition teams</h2>
+            </div>
+          </div>
+          <div class="tmon-grid">
+            {testimonials.map((t) => (
+              <figure class="tmon-card">
+                <blockquote class="tmon-quote">{t.quote}</blockquote>
+                <figcaption class="tmon-cite">
+                  <span class="tmon-name">{t.name}</span>
+                  <span class="tmon-role">{t.title}</span>
+                  <span class="tmon-org">{t.org}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   <!-- CTA -->
   <section class="cta">
     <div class="container cta-inner">
@@ -226,6 +258,24 @@ const featured = projects
     .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
     @media (max-width:920px){.work-grid{grid-template-columns:1fr 1fr}}
     @media (max-width:600px){.work-grid{grid-template-columns:1fr}}
+
+    /* Testimonials */
+    .tmon-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .tmon-card{
+      position:relative;display:flex;flex-direction:column;
+      background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg);
+      padding:30px 32px 26px;box-shadow:var(--shadow-sm);
+    }
+    .tmon-card::before{
+      content:"\201C";position:absolute;top:10px;left:20px;z-index:0;
+      font-family:var(--font-display);font-weight:800;font-size:4.2rem;line-height:1;color:var(--accent-wash);
+    }
+    .tmon-quote{position:relative;z-index:1;margin:0 0 20px;font-size:1.04rem;line-height:1.65;color:var(--ink-soft)}
+    .tmon-cite{display:flex;flex-direction:column;margin-top:auto;border-top:1px solid var(--line);padding-top:14px}
+    .tmon-name{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.02rem}
+    .tmon-role{font-size:.9rem;color:var(--ink-soft);margin-top:2px}
+    .tmon-org{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-ink);margin-top:7px}
+    @media (max-width:760px){.tmon-grid{grid-template-columns:1fr}}
 
     /* CTA */
     .cta{background:var(--ink-900);color:#fff;margin-top:clamp(50px,7vw,90px)}
