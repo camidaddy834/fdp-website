@@ -101,7 +101,14 @@ export const NAV: NavItem[] = [
       { label: "History", href: "/history" },
     ],
   },
-  { label: "Portfolio", href: "/portfolio" },
+  {
+    label: "Portfolio",
+    href: "/portfolio",
+    children: [
+      { label: "Overview", href: "/portfolio" },
+      { label: "Testimonials", href: "/testimonials" },
+    ],
+  },
   { label: "Capabilities", href: "/capabilities" },
   { label: "Team", href: "/team" },
   { label: "News", href: "/news" },
