@@ -20,7 +20,7 @@ gallery:
   - ../../assets/projects/harker-heights-hs-10.jpg
   - ../../assets/projects/harker-heights-hs-11.jpg
 featured: true
-order: 3
+order: 4
 ---
 
 ## The challenge
