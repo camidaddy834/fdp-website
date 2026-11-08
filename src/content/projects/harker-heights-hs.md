@@ -3,6 +3,7 @@ title: "Harker Heights High School Renovation"
 client: "Killeen ISD"
 sector: "k-12"
 location: "Harker Heights, TX"
+year: 2025
 services: ["Food Service Design", "Equipment Specification"]
 summary: "A full cafeteria and kitchen renovation that turned a single serving line into a branded food court — multiple themed venues out front, backed by a rebuilt production kitchen and warewashing room."
 heroImage: ../../assets/projects/harker-heights-hs.jpg
