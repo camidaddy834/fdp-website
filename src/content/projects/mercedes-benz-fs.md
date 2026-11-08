@@ -8,7 +8,7 @@ services: ["Food Service Design", "Corporate Dining", "Equipment Specification"]
 summary: "The employee café at the heart of Mercedes-Benz Financial Services' award-winning North Fort Worth campus."
 heroImage: ../../assets/projects/mercedes-benz-fs.jpg
 featured: true
-order: 2
+order: 4
 ---
 
 ## The project

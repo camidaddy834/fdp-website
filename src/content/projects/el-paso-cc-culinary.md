@@ -7,7 +7,7 @@ services: ["Food Service Design", "Teaching Kitchen Design", "Equipment Specific
 summary: "A culinary arts teaching center anchored by a wood-fired brick oven and open servery — featured in Texas Architect and FCSI's The Americas Quarterly."
 heroImage: ../../assets/projects/el-paso-cc-culinary.jpg
 featured: true
-order: 3
+order: 5
 ---
 
 ## The project

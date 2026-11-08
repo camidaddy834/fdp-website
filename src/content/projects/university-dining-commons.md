@@ -10,7 +10,7 @@ seats: 850
 services: ["Master Planning", "Food Service Design", "Equipment Specification"]
 summary: "A residential dining hall reimagined as eight interactive micro-restaurants, doubling throughput at peak without expanding the footprint."
 featured: true
-order: 1
+order: 20
 draft: true
 ---
 

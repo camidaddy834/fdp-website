@@ -18,8 +18,8 @@ gallery:
   - ../../assets/projects/harker-heights-hs-09.jpg
   - ../../assets/projects/harker-heights-hs-10.jpg
   - ../../assets/projects/harker-heights-hs-11.jpg
-featured: false
-order: 5
+featured: true
+order: 3
 ---
 
 ## The challenge

@@ -24,7 +24,7 @@ gallery:
   - ../../assets/projects/ems-admin-building-15.jpg
   - ../../assets/projects/ems-admin-building-16.jpg
   - ../../assets/projects/ems-admin-building-17.jpg
-featured: false
+featured: true
 order: 2
 ---
 
