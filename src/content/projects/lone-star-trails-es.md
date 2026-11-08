@@ -34,6 +34,3 @@ Mod-U-Serve serving line**, a **Corian tray slide** selected during the design
 process, and **illuminated blue-tile counter fronts**.
 
 Different designs. A decade of continued trust.
-
-Thank you, Midland ISD, for the opportunity to contribute to both projects — and
-to our partners who helped bring these spaces to life.
