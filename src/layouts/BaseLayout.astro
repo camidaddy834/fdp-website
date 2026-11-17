@@ -21,7 +21,10 @@ const isActive = (href: string) =>
 // Absolute URLs for canonical + social tags (Astro.site = https://fdp.org).
 const origin = Astro.site?.href.replace(/\/$/, "") ?? "https://fdp.org";
 const canonical = new URL(path, `${origin}/`).href;
-const ogImage = new URL(image ?? "/fdp-logo.png", `${origin}/`).href;
+// Default share card is the branded 1200x630 og-image.jpg; a page can override
+// via the `image` prop (e.g. a news hero).
+const ogImage = new URL(image ?? "/og-image.jpg", `${origin}/`).href;
+const usingDefaultOg = !image;
 
 // Organization + per-office LocalBusiness structured data (JSON-LD). Rendered on
 // every page; the shared @id lets the office nodes reference the parent org.
@@ -90,6 +93,19 @@ const schema = {
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:image" content={ogImage} />
+    {
+      usingDefaultOg && (
+        <>
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:type" content="image/jpeg" />
+          <meta
+            property="og:image:alt"
+            content="Foodservice Design Professionals — food service facility design & consulting · Dallas & Houston"
+          />
+        </>
+      )
+    }
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={desc} />
