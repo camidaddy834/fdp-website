@@ -17,12 +17,15 @@ const d = project.data;
 const meta = VERTICAL_META[d.sector];
 const { Content } = await render(project);
 
-const facts = [
-  d.location && { k: "Location", v: d.location },
-  d.year && { k: "Completed", v: String(d.year) },
-  d.squareFeet && { k: "Area", v: `${d.squareFeet.toLocaleString()} sq ft` },
-  d.seats && { k: "Seats", v: d.seats.toLocaleString() },
-].filter(Boolean) as { k: string; v: string }[];
+// Always show the core facts during review; a blank renders as "—" so the
+// missing value is an obvious reminder. (Swap to a .filter(Boolean) to hide
+// blanks once the data is confirmed.)
+const facts: { k: string; v: string | null }[] = [
+  { k: "Location", v: d.location ?? null },
+  { k: "Completed", v: d.year ? String(d.year) : null },
+  { k: "Area", v: d.squareFeet ? `${d.squareFeet.toLocaleString()} sq ft` : null },
+  { k: "Seats", v: d.seats ? d.seats.toLocaleString() : null },
+];
 ---
 
 <BaseLayout title={d.title} description={d.summary}>
@@ -60,7 +63,7 @@ const facts = [
             facts.map((f) => (
               <div class="fact">
                 <dt>{f.k}</dt>
-                <dd class="tabular">{f.v}</dd>
+                <dd class:list={["tabular", { "fact-tbd": !f.v }]}>{f.v ?? "—"}</dd>
               </div>
             ))
           }
@@ -135,6 +138,7 @@ const facts = [
     .fact:last-child{border-bottom:none}
     .fact dt{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
     .fact dd{margin:0;font-family:var(--font-display);font-weight:600;font-size:1.08rem;color:var(--ink)}
+    .fact dd.fact-tbd{color:var(--muted);font-weight:500}
     .svc{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
     .svc li{font-size:.95rem;font-weight:500;color:var(--ink-soft);font-family:var(--font-body)}
     .cs-cta{width:100%;justify-content:center;margin-top:18px}
