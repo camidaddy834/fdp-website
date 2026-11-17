@@ -10,21 +10,39 @@ export const SITE = {
   cfBeaconToken: "deab28742e984c95b0fa61fff4565abc",
 };
 
-/** Two offices — Dallas & Houston (San Antonio/Austin retired in the redesign). */
+/** Two offices — Dallas & Houston (San Antonio/Austin retired in the redesign).
+ *  The structured street/locality/region/postal fields feed the LocalBusiness
+ *  JSON-LD in BaseLayout; `address` is the human-readable line used in the footer. */
 export const OFFICES = [
   {
     city: "Dallas",
     area: "Southlake",
     address: "584 N. Kimball Ave, Southlake, TX 76092",
+    street: "584 N. Kimball Ave",
+    locality: "Southlake",
+    region: "TX",
+    postal: "76092",
+    // Geocoded via OpenStreetMap/Nominatim (rooftop match on 584 N Kimball Ave).
+    lat: 32.94913,
+    lng: -97.11677,
     phone: "972-245-5300",
     phoneHref: "tel:+19722455300",
+    phoneE164: "+1-972-245-5300",
   },
   {
     city: "Houston",
     area: "The Woodlands",
     address: "594 Sawdust Rd, Suite 139, The Woodlands, TX 77380",
+    street: "594 Sawdust Rd, Suite 139",
+    locality: "The Woodlands",
+    region: "TX",
+    postal: "77380",
+    // Geocoded via OpenStreetMap/Nominatim (street-level match on Sawdust Rd, 77380).
+    lat: 30.12687,
+    lng: -95.46100,
     phone: "281-350-2323",
     phoneHref: "tel:+12813502323",
+    phoneE164: "+1-281-350-2323",
   },
 ] as const;
 

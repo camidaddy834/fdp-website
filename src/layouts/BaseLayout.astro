@@ -5,8 +5,11 @@ import { SITE, NAV, OFFICES } from "../data/site";
 interface Props {
   title?: string;
   description?: string;
+  /** Page-specific social preview image (absolute path, e.g. "/news/foo.jpg").
+   *  Defaults to the FDP logo. */
+  image?: string;
 }
-const { title, description } = Astro.props;
+const { title, description, image } = Astro.props;
 const fullTitle = title ? `${title} · ${SITE.short}` : `${SITE.name}`;
 const desc =
   description ??
@@ -14,6 +17,56 @@ const desc =
 const path = Astro.url.pathname;
 const isActive = (href: string) =>
   href === "/" ? path === "/" : path.startsWith(href);
+
+// Absolute URLs for canonical + social tags (Astro.site = https://fdp.org).
+const origin = Astro.site?.href.replace(/\/$/, "") ?? "https://fdp.org";
+const canonical = new URL(path, `${origin}/`).href;
+const ogImage = new URL(image ?? "/fdp-logo.png", `${origin}/`).href;
+
+// Organization + per-office LocalBusiness structured data (JSON-LD). Rendered on
+// every page; the shared @id lets the office nodes reference the parent org.
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${origin}/#organization`,
+      name: SITE.name,
+      alternateName: SITE.short,
+      url: `${origin}/`,
+      logo: `${origin}/fdp-logo.png`,
+      image: `${origin}/fdp-logo.png`,
+      email: SITE.proposalEmail,
+      description:
+        "Food service facility design and consulting firm serving K-12, higher education, corporate, healthcare, hospitality, and government clients nationally and internationally since 1967.",
+      foundingDate: "1967",
+      areaServed: "US",
+    },
+    ...OFFICES.map((o) => ({
+      "@type": "LocalBusiness",
+      "@id": `${origin}/#office-${o.city.toLowerCase()}`,
+      name: `${SITE.name} — ${o.city}`,
+      parentOrganization: { "@id": `${origin}/#organization` },
+      url: `${origin}/contact`,
+      image: `${origin}/fdp-logo.png`,
+      telephone: o.phoneE164,
+      email: SITE.proposalEmail,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: o.street,
+        addressLocality: o.locality,
+        addressRegion: o.region,
+        postalCode: o.postal,
+        addressCountry: "US",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: o.lat,
+        longitude: o.lng,
+      },
+    })),
+  ],
+};
 ---
 
 <!doctype html>
@@ -30,9 +83,22 @@ const isActive = (href: string) =>
     />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
+    <link rel="canonical" href={canonical} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={desc} />
+    <meta name="twitter:image" content={ogImage} />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(schema)}
+    />
     {
       SITE.cfBeaconToken && (
         <script
