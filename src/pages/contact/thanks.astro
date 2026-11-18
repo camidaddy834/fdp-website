@@ -35,16 +35,17 @@ import { SITE } from "../../data/site";
     </div>
   </section>
 
-  <!-- Conversion event. Fires only when GA4 is live (SITE.ga4Id set); the
-       pageview itself is the Cloudflare Web Analytics conversion signal. -->
+  <!-- Conversion event. Pushed to the GTM dataLayer so a GTM trigger can map it
+       to a GA4 conversion; the pageview itself is also the Cloudflare Web
+       Analytics conversion signal. Harmless if GTM isn't loaded. -->
   <script is:inline>
-    if (window.gtag) {
-      window.gtag("event", "generate_lead", {
-        form_id: "proposal",
-        value: 1,
-        currency: "USD",
-      });
-    }
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "generate_lead",
+      form_id: "proposal",
+      value: 1,
+      currency: "USD",
+    });
   </script>
 
   <style>
