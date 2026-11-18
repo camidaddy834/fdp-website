@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { SITE, NAV, OFFICES } from "../data/site";
+import ConsentBanner from "../components/ConsentBanner.astro";
 
 interface Props {
   title?: string;
@@ -120,10 +121,20 @@ const schema = {
     />
     {
       SITE.gtmId && (
-        <script
-          is:inline
-          set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${SITE.gtmId}');`}
-        />
+        <>
+          {/* Consent Mode v2 defaults — MUST run before the GTM container loads.
+              Everything denied until the visitor opts in via the banner; a saved
+              "granted" choice is honored immediately on later page loads. Also
+              defines window.gtag, which the banner uses to push consent updates. */}
+          <script
+            is:inline
+            set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}var g='denied';try{if(localStorage.getItem('fdp-consent')==='granted')g='granted';}catch(e){}gtag('consent','default',{ad_storage:g,ad_user_data:g,ad_personalization:g,analytics_storage:g,functionality_storage:'granted',security_storage:'granted',wait_for_update:500});gtag('set','ads_data_redaction',true);gtag('set','url_passthrough',true);`}
+          />
+          <script
+            is:inline
+            set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${SITE.gtmId}');`}
+          />
+        </>
       )
     }
     {
@@ -257,8 +268,17 @@ const schema = {
       <div class="container footer-base">
         <span>© {new Date().getFullYear()} {SITE.name}</span>
         <span class="footer-cities">Dallas · Houston</span>
+        {
+          SITE.gtmId && (
+            <button type="button" id="cookie-prefs" class="footer-cookie">
+              Cookie preferences
+            </button>
+          )
+        }
       </div>
     </footer>
+
+    {SITE.gtmId && <ConsentBanner />}
 
     <style>
       .skip{
@@ -390,10 +410,16 @@ const schema = {
       .footer-mail{color:var(--on-dark-accent);text-decoration:none;font-family:var(--font-mono);font-size:.9rem}
       .footer-mail:hover{text-decoration:underline}
       .footer-base{
-        display:flex;justify-content:space-between;align-items:center;gap:16px;
+        display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
         padding:20px 0 30px;border-top:1px solid rgba(255,255,255,.08);
         font-family:var(--font-mono);font-size:12px;color:#7f8a95;
       }
+      .footer-cookie{
+        background:none;border:0;padding:0;cursor:pointer;
+        font-family:var(--font-mono);font-size:12px;color:#7f8a95;
+        text-decoration:underline;text-underline-offset:2px;
+      }
+      .footer-cookie:hover{color:#cfd6dd}
       @media (max-width:720px){
         .footer-grid{grid-template-columns:1fr;gap:30px}
       }

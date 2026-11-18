@@ -138,8 +138,28 @@ needed once the container is live.
 
 ---
 
-## ⚠️ Cookie consent — do before publishing GA4 tags
+## Cookie consent (built — Consent Mode v2)
 
-GA4/GTM set cookies and the site currently has **no consent banner**. For a
-US-only B2B site the risk is lower, but a clean setup adds a lightweight consent
-banner wired to **GTM Consent Mode** before GA4 tags go live. Not yet built.
+A consent banner is live in
+[`src/components/ConsentBanner.astro`](../src/components/ConsentBanner.astro),
+wired to **Google Consent Mode v2** via BaseLayout:
+
+- **Default = denied.** Before the GTM container loads, a `<head>` script sets
+  `ad_storage`, `ad_user_data`, `ad_personalization`, and `analytics_storage`
+  to `denied` (and `ads_data_redaction` / `url_passthrough` on). So GA4 collects
+  nothing until the visitor opts in.
+- **Banner** shows on first visit → **Accept** fires
+  `gtag('consent','update', …)` flipping those to `granted`; **Decline** keeps
+  them denied. The choice is saved in `localStorage` (`fdp-consent`) and honored
+  on later visits with no re-prompt.
+- **Withdrawable:** a "Cookie preferences" link in the footer reopens the banner.
+
+**What this means for your GTM tags:** nothing extra to configure — GA4 tags
+respect Consent Mode automatically. Just make sure, in GTM, that **Consent Mode
+isn't disabled** (it's on by default). When a visitor declines, GA4 sends
+cookieless "consent pings" rather than full hits, which is expected behavior.
+
+> **Tuning:** The default is **opt-in** (deny until accept), which is the
+> privacy-forward choice but reduces data from visitors who don't click Accept.
+> To switch to opt-out (track by default, honor Decline), change the default
+> state in `BaseLayout.astro` — ask before doing this, it has legal implications.

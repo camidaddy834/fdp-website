@@ -1,0 +1,137 @@
+---
+// Cookie-consent banner wired to Google Consent Mode v2.
+//
+// The *default* consent state (everything denied until the visitor opts in) is
+// set in BaseLayout's <head>, BEFORE the GTM container loads — that script also
+// defines window.gtag. This component is just the UI + the opt-in/opt-out that
+// fires gtag('consent','update', …) and remembers the choice in localStorage.
+// Rendered only when SITE.gtmId is set (see BaseLayout).
+---
+
+<aside id="consent-banner" class="consent" role="region" aria-label="Cookie consent" hidden>
+  <div class="consent-inner">
+    <p class="consent-text">
+      We use analytics cookies to see how visitors use our site, so we can make
+      it better. Decline and we&rsquo;ll keep only the essentials. You can change
+      this anytime from &ldquo;Cookie preferences&rdquo; in the footer.
+    </p>
+    <div class="consent-actions">
+      <button type="button" class="btn btn-ghost" id="consent-decline">Decline</button>
+      <button type="button" class="btn btn-primary" id="consent-accept">Accept</button>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .consent {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 80;
+    padding: 0 16px 16px;
+    pointer-events: none; /* let clicks through the gutter; card re-enables */
+  }
+  .consent[hidden] {
+    display: none;
+  }
+  .consent-inner {
+    pointer-events: auto;
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    background: var(--paper);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 16px 20px;
+  }
+  .consent-text {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    max-width: 70ch;
+  }
+  .consent-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .consent .btn {
+    padding: 9px 18px;
+    font-size: 0.9rem;
+  }
+  @media (max-width: 560px) {
+    .consent-inner {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .consent-actions {
+      justify-content: stretch;
+    }
+    .consent-actions .btn {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  const KEY = "fdp-consent";
+  const banner = document.getElementById("consent-banner");
+
+  const read = () => {
+    try {
+      return localStorage.getItem(KEY);
+    } catch {
+      return null;
+    }
+  };
+  const write = (v: string) => {
+    try {
+      localStorage.setItem(KEY, v);
+    } catch {
+      /* private mode / blocked storage — choice just won't persist */
+    }
+  };
+  const show = () => banner?.removeAttribute("hidden");
+  const hide = () => banner?.setAttribute("hidden", "");
+
+  const apply = (granted: boolean) => {
+    const v = granted ? "granted" : "denied";
+    // gtag is defined by the Consent Mode default script in <head>.
+    const gtag = (window as any).gtag;
+    if (typeof gtag === "function") {
+      gtag("consent", "update", {
+        ad_storage: v,
+        ad_user_data: v,
+        ad_personalization: v,
+        analytics_storage: v,
+      });
+    }
+  };
+
+  // Show the banner only until the visitor has made a choice.
+  if (!read()) show();
+
+  document.getElementById("consent-accept")?.addEventListener("click", () => {
+    write("granted");
+    apply(true);
+    hide();
+  });
+  document.getElementById("consent-decline")?.addEventListener("click", () => {
+    write("denied");
+    apply(false);
+    hide();
+  });
+  // Footer "Cookie preferences" link reopens the banner so a choice can change.
+  document.getElementById("cookie-prefs")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    show();
+  });
+</script>
