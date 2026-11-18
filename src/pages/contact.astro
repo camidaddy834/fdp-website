@@ -142,13 +142,15 @@ import { VERTICALS } from "../content.config";
       const status = form.querySelector(".form-status");
       let started = false;
 
-      // GA4 funnel: fire once when the visitor first engages a field.
+      // GTM funnel: push once when the visitor first engages a field. A GTM
+      // trigger on this custom event can forward it to GA4 as form_start.
       form.addEventListener(
         "focusin",
         () => {
           if (started) return;
           started = true;
-          if (window.gtag) window.gtag("event", "form_start", { form_id: "proposal" });
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "form_start", form_id: "proposal" });
         },
         { once: false },
       );

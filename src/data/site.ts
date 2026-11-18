@@ -8,9 +8,11 @@ export const SITE = {
   // Cloudflare Web Analytics beacon token. Paste the token from your
   // Cloudflare Web Analytics site here; the beacon renders only when set.
   cfBeaconToken: "deab28742e984c95b0fa61fff4565abc",
-  // Google Analytics 4 Measurement ID (format "G-XXXXXXXXXX"). Leave empty to
-  // keep GA4 dormant — gtag only loads and tracks once this is filled in.
-  ga4Id: "",
+  // Google Tag Manager container ID (format "GTM-XXXXXXX"). GA4 and the
+  // conversion tags are configured inside the GTM UI; the site just loads the
+  // container and pushes events (form_start, generate_lead) to the dataLayer.
+  // Leave empty to keep GTM from loading.
+  gtmId: "GTM-K7FCBSBB",
 };
 
 /** Two offices — Dallas & Houston (San Antonio/Austin retired in the redesign).
