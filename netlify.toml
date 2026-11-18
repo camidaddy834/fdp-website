@@ -6,6 +6,17 @@
 [build.environment]
   NODE_VERSION = "24"
 
+# Serverless functions (proposal form handler lives here)
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Clean URL for the proposal form — proxied to the function (200 = rewrite)
+[[redirects]]
+  from = "/api/proposal"
+  to = "/.netlify/functions/proposal"
+  status = 200
+
 # Long-cache immutable build assets (Astro fingerprints these)
 [[headers]]
   for = "/_astro/*"

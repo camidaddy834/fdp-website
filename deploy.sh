@@ -25,6 +25,8 @@ echo "==> Building…"
 npm run build
 
 echo "==> Deploying to production (new.fdp.org)…"
-netlify deploy --dir=dist --prod
+# --functions ensures the proposal form handler in netlify/functions/ is
+# bundled and deployed alongside the static site.
+netlify deploy --dir=dist --functions=netlify/functions --prod
 
 echo "==> Done."

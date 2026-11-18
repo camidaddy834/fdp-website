@@ -8,8 +8,10 @@ interface Props {
   /** Page-specific social preview image (absolute path, e.g. "/news/foo.jpg").
    *  Defaults to the FDP logo. */
   image?: string;
+  /** Keep this page out of search indexes (e.g. the form thank-you page). */
+  noindex?: boolean;
 }
-const { title, description, image } = Astro.props;
+const { title, description, image, noindex } = Astro.props;
 const fullTitle = title ? `${title} · ${SITE.short}` : `${SITE.name}`;
 const desc =
   description ??
@@ -86,6 +88,7 @@ const schema = {
     />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
@@ -115,6 +118,21 @@ const schema = {
       is:inline
       set:html={JSON.stringify(schema)}
     />
+    {
+      SITE.ga4Id && (
+        <>
+          <script
+            is:inline
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ga4Id}`}
+          />
+          <script
+            is:inline
+            set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${SITE.ga4Id}');`}
+          />
+        </>
+      )
+    }
     {
       SITE.cfBeaconToken && (
         <script

@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../data/site";
+---
+
+<BaseLayout
+  title="Thank you"
+  description="Your proposal request has been received. We'll be in touch shortly."
+  noindex={true}
+>
+  <section class="thanks">
+    <div class="container thanks-inner">
+      <div class="check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="34" height="34">
+          <path
+            d="M20 6L9 17l-5-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </div>
+      <h1 class="thanks-title">Request received</h1>
+      <p class="thanks-lede">
+        Thanks &mdash; your proposal request is on its way to our team. We
+        typically reply within one business day. If it&rsquo;s urgent, email us
+        directly at
+        <a href={`mailto:${SITE.proposalEmail}`}>{SITE.proposalEmail}</a>.
+      </p>
+      <div class="thanks-actions">
+        <a href="/portfolio" class="btn btn-primary">Browse our work</a>
+        <a href="/" class="btn btn-ghost">Back to home</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversion event. Fires only when GA4 is live (SITE.ga4Id set); the
+       pageview itself is the Cloudflare Web Analytics conversion signal. -->
+  <script is:inline>
+    if (window.gtag) {
+      window.gtag("event", "generate_lead", {
+        form_id: "proposal",
+        value: 1,
+        currency: "USD",
+      });
+    }
+  </script>
+
+  <style>
+    .thanks {
+      display: grid;
+      place-items: center;
+      min-height: min(70vh, 640px);
+      padding: clamp(48px, 8vw, 100px) 0;
+    }
+    .thanks-inner {
+      text-align: center;
+      max-width: 60ch;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .check {
+      display: grid;
+      place-items: center;
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: var(--accent-wash);
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .thanks-title {
+      font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .thanks-lede {
+      color: var(--ink-soft);
+      font-size: 1.14rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+    .thanks-lede a {
+      color: var(--accent-ink);
+      font-weight: 600;
+    }
+    .thanks-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
+</BaseLayout>
