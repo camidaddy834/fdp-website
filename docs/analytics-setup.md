@@ -15,11 +15,19 @@ Manager (GTM).
 > it to the container ID makes the tag send nothing. If GA4 ever shows no data,
 > check this field first.
 >
+> The `generate_lead` tag sends event parameters **`value` = 1** and
+> **`currency` = USD** (added in Version 5, as constants matching the dataLayer
+> push).
+>
 > **Still open (in the GA4 UI, not GTM):** mark `generate_lead` as a **Key
-> event** once it appears under Admin → Key events. **Optional enhancement:** add
-> `value` / `currency` event parameters to the `generate_lead` tag (the dataLayer
-> push already carries `value: 1`, `currency: "USD"`) via Data Layer Variables —
-> not required for the conversion to count.
+> event** once it appears under Admin → Key events.
+>
+> **Caching note:** `gtm.js` is served with a ~15-min cache (`max-age=900`), so
+> after publishing a GTM change, a browser that already loaded the page keeps the
+> old container until that expires. Verify container changes by fetching
+> `https://www.googletagmanager.com/gtm.js?id=GTM-TMHTCZNM` fresh, not by
+> reloading an already-cached page. Fresh visitors get the new container
+> immediately.
 
 The step-by-step below documents how it was built, for reference / rebuilding.
 
