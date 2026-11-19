@@ -1,7 +1,27 @@
 # Analytics & Conversion Tracking — Setup Guide
 
-How analytics is wired on the FDP site, and the exact steps to finish the
-Google Analytics 4 (GA4) setup inside Google Tag Manager (GTM).
+How analytics is wired on the FDP site, and the GA4 setup inside Google Tag
+Manager (GTM).
+
+> **Status (2026-11-18): LIVE and verified.** GTM container `GTM-TMHTCZNM`
+> (Version 3) is published with a base **Google Tag** (`G-QQ9CVNHSPZ`,
+> Initialization – All Pages) plus two **GA4 Event** tags firing on Custom Event
+> triggers `form_start` and `generate_lead`. All three events were confirmed
+> hitting GA4 (`/g/collect`, `tid=G-QQ9CVNHSPZ`) on the live site, with Consent
+> Mode respected (`gcs=G100` when denied → `G111` when granted).
+>
+> **Gotcha that bit us once:** the base tag's **Tag ID must be the GA4
+> Measurement ID `G-QQ9CVNHSPZ`**, *not* the container ID `GTM-TMHTCZNM`. Setting
+> it to the container ID makes the tag send nothing. If GA4 ever shows no data,
+> check this field first.
+>
+> **Still open (in the GA4 UI, not GTM):** mark `generate_lead` as a **Key
+> event** once it appears under Admin → Key events. **Optional enhancement:** add
+> `value` / `currency` event parameters to the `generate_lead` tag (the dataLayer
+> push already carries `value: 1`, `currency: "USD"`) via Data Layer Variables —
+> not required for the conversion to count.
+
+The step-by-step below documents how it was built, for reference / rebuilding.
 
 ## How it works (already in code)
 
