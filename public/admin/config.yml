@@ -1,0 +1,128 @@
+# Sveltia CMS configuration — browser-based editing for FDP staff.
+# Served at https://fdp.org/admin/  (this folder lives in public/, copied
+# verbatim by Astro, so there is no separate build step for the editor).
+#
+# How publishing works:
+#   staff edit here  ->  Sveltia commits to the `main` branch on GitHub
+#   ->  Netlify's continuous deployment rebuilds and publishes the site.
+# So edits go live on their own, with no code and no manual deploy.
+#
+# One-time setup (GitHub OAuth app + Cloudflare auth worker + Netlify CD)
+# is documented in docs/cms-setup.md. After deploying the auth worker,
+# replace the base_url placeholder below with its URL.
+
+backend:
+  name: github
+  repo: camidaddy834/fdp-website
+  branch: main
+  # Cloudflare auth worker (sveltia-cms-auth) that completes the GitHub OAuth
+  # handshake. Deployed 2026-11-19; see docs/cms-setup.md.
+  base_url: https://sveltia-cms-auth.fooddesignpro.workers.dev
+
+# Links the editor uses for "View live site" etc.
+site_url: https://fdp.org
+display_url: https://fdp.org
+logo_url: https://fdp.org/fdp-logo.png
+
+# Fallback upload location for any media field that doesn't set its own
+# (the project/news image fields below each point to the right folder).
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  # ── PORTFOLIO PROJECTS ────────────────────────────────────────────────
+  - name: projects
+    label: "Projects (Portfolio)"
+    label_singular: "Project"
+    description: "Case-study projects shown on the portfolio, sector pages, and (if featured) the homepage."
+    folder: "src/content/projects"
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{fields.title | slugify}}"
+    summary: "{{fields.title}}  —  {{fields.location}}"
+    sortable_fields: [order, title, year]
+    preview_path: "work/{{slug}}"
+    fields:
+      - { name: title, label: "Title", widget: string }
+      - name: sector
+        label: "Sector"
+        widget: select
+        hint: "Which industry this project belongs to."
+        options:
+          - { label: "Government", value: government }
+          - { label: "Corporate", value: corporate }
+          - { label: "Health Care", value: health-care }
+          - { label: "Hospitality", value: hospitality }
+          - { label: "Sports", value: sports }
+          - { label: "Universities", value: universities }
+          - { label: "K-12", value: k-12 }
+          - { label: "Retail", value: retail }
+          - { label: "Correctional", value: correctional }
+          - { label: "Production Centers", value: production-centers }
+      - { name: location, label: "Location", widget: string, hint: 'City, State — e.g. "Houston, TX"' }
+      - { name: summary, label: "Summary", widget: text, hint: "One or two sentences — shown on cards and at the top of the case study." }
+      - { name: client, label: "Client / Owner", widget: string, required: false }
+      - { name: year, label: "Year", widget: number, value_type: int, required: false, min: 1900, max: 2100 }
+      - { name: squareFeet, label: "Square Feet", widget: number, value_type: int, required: false, hint: 'Shown as e.g. "12,000 sq ft" on the card.' }
+      - { name: seats, label: "Seats", widget: number, value_type: int, required: false, hint: "Shown if there is no square-footage figure." }
+      - name: services
+        label: "Services"
+        widget: list
+        required: false
+        default: []
+        summary: "{{fields.service}}"
+        field: { name: service, label: "Service", widget: string }
+      - name: heroImage
+        label: "Hero Image"
+        widget: image
+        required: false
+        hint: "Main photo. Leave empty to show the branded FDP placeholder."
+        # Uploads land in src/assets/projects/ and are written as
+        # ../../assets/projects/<file> so Astro's image pipeline optimizes them.
+        media_folder: "/src/assets/projects"
+        public_folder: "../../assets/projects"
+      - name: gallery
+        label: "Gallery"
+        widget: list
+        required: false
+        default: []
+        field:
+          name: image
+          label: "Image"
+          widget: image
+          media_folder: "/src/assets/projects"
+          public_folder: "../../assets/projects"
+      - { name: featured, label: "Feature on homepage?", widget: boolean, default: false }
+      - { name: order, label: "Sort order (lower shows first)", widget: number, value_type: int, default: 100 }
+      - { name: draft, label: "Draft — hide from the live site", widget: boolean, default: false }
+      - { name: body, label: "Case study", widget: markdown, hint: "The story: the challenge, the design solution, the outcome." }
+
+  # ── NEWS ──────────────────────────────────────────────────────────────
+  - name: news
+    label: "News"
+    label_singular: "News post"
+    description: "News / blog posts."
+    folder: "src/content/news"
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{fields.title | slugify}}"
+    summary: "{{fields.title}}"
+    sortable_fields: [date, title]
+    preview_path: "news/{{slug}}"
+    fields:
+      - { name: title, label: "Title", widget: string }
+      - { name: date, label: "Date", widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+      - { name: author, label: "Author", widget: string, default: "FDP" }
+      - { name: excerpt, label: "Excerpt", widget: text, required: false, hint: "Short teaser shown in the news list." }
+      - name: heroImage
+        label: "Hero Image"
+        widget: image
+        required: false
+        # News images live in public/news/ and are referenced as /news/<file>.
+        media_folder: "/public/news"
+        public_folder: "/news"
+      - { name: originalUrl, label: "Original URL", widget: string, required: false, hint: "Link to the original article, if republished." }
+      - { name: draft, label: "Draft — hide from the live site", widget: boolean, default: false }
+      - { name: body, label: "Body", widget: markdown }
