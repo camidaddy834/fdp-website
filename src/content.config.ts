@@ -29,17 +29,22 @@ const projects = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      client: z.string().optional(),
+      // Optional fields use .nullish() (not .optional()) because the CMS
+      // (Sveltia/Decap) writes an empty field as `null`, and plain .optional()
+      // rejects null — which would fail the build on any save that leaves a
+      // field blank. .nullish() accepts both "missing" and null.
+      client: z.string().nullish(),
       sector: z.enum(VERTICALS),
       location: z.string(),
-      year: z.number().int().optional(),
+      year: z.number().int().nullish(),
       // Key stats surfaced on cards and case-study headers
-      squareFeet: z.number().int().optional(),
-      seats: z.number().int().optional(),
-      services: z.array(z.string()).default([]),
+      squareFeet: z.number().int().nullish(),
+      seats: z.number().int().nullish(),
+      // Lists can arrive as null from the CMS too; coerce back to an array.
+      services: z.array(z.string()).nullish().transform((v) => v ?? []),
       summary: z.string(),
-      heroImage: image().optional(),
-      gallery: z.array(image()).default([]),
+      heroImage: image().nullish(),
+      gallery: z.array(image()).nullish().transform((v) => v ?? []),
       featured: z.boolean().default(false),
       order: z.number().default(100),
       draft: z.boolean().default(false),
@@ -55,10 +60,10 @@ const news = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
-    author: z.string().default("FDP"),
-    excerpt: z.string().optional(),
-    heroImage: z.string().optional(),
-    originalUrl: z.string().optional(),
+    author: z.string().nullish().transform((v) => v || "FDP"),
+    excerpt: z.string().nullish(),
+    heroImage: z.string().nullish(),
+    originalUrl: z.string().nullish(),
     draft: z.boolean().default(false),
   }),
 });
