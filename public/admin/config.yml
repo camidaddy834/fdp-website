@@ -19,10 +19,12 @@ backend:
   # handshake. Deployed 2026-11-19; see docs/cms-setup.md.
   base_url: https://sveltia-cms-auth.fooddesignpro.workers.dev
 
-# Links the editor uses for "View live site" etc.
-site_url: https://fdp.org
-display_url: https://fdp.org
-logo_url: https://fdp.org/fdp-logo.png
+# Links the editor uses for "View live site" etc. NOTE: the new site currently
+# lives at new.fdp.org; fdp.org still points at the old Wix site. Switch these
+# to https://fdp.org after the domain cutover.
+site_url: https://new.fdp.org
+display_url: https://new.fdp.org
+logo_url: https://new.fdp.org/fdp-logo.png
 
 # Fallback upload location for any media field that doesn't set its own
 # (the project/news image fields below each point to the right folder).
