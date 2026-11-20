@@ -1,11 +1,15 @@
 ---
-title: "Adams Middle School"
-client: "Grand Prairie ISD"
-sector: "k-12"
-location: "Grand Prairie, TX"
+title: Adams Middle School
+sector: k-12
+location: Grand Prairie, TX
+summary: A Panther-themed middle school food court — branded serving venues wrapped around a daylit cafeteria, backed by the kitchen that keeps them running!!!
+client: Grand Prairie ISD
 year: 2025
-services: ["Food Service Design", "Equipment Specification"]
-summary: "A Panther-themed middle school food court — branded serving venues wrapped around a daylit cafeteria, backed by the kitchen that keeps them running."
+squareFeet: null
+seats: null
+services:
+  - Food Service Design
+  - Equipment Specification
 heroImage: ../../assets/projects/gp-adams-ms.jpg
 gallery:
   - ../../assets/projects/gp-adams-ms-01.jpg
@@ -29,6 +33,7 @@ gallery:
   - ../../assets/projects/gp-adams-ms-19.jpg
 featured: false
 order: 11
+draft: false
 ---
 
 ## The project
