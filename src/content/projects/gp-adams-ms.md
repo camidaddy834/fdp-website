@@ -2,7 +2,7 @@
 title: Adams Middle School
 sector: k-12
 location: Grand Prairie, TX
-summary: A Panther-themed middle school food court — branded serving venues wrapped around a daylit cafeteria, backed by the kitchen that keeps them running!!!
+summary: A Panther-themed middle school food court — branded serving venues wrapped around a daylit cafeteria, backed by the kitchen that keeps them running.
 client: Grand Prairie ISD
 year: 2025
 squareFeet: null
