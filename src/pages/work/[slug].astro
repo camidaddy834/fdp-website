@@ -33,10 +33,10 @@ const facts: { k: string; v: string | null }[] = [
     <!-- Header -->
     <header class="cs-head">
       <div class="container">
-        <p class="crumb">
-          <a href="/portfolio">Portfolio</a> <span>/</span>
+        <nav class="crumb" aria-label="Breadcrumb">
+          <a href="/portfolio">Portfolio</a> <span aria-hidden="true">/</span>
           <a href={`/portfolio/${d.sector}/`}>{meta.label}</a>
-        </p>
+        </nav>
         <h1 class="cs-title">{d.title}</h1>
         <p class="cs-summary">{d.summary}</p>
       </div>
