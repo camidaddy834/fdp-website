@@ -23,8 +23,8 @@ const stat = d.squareFeet
         <Image
           src={d.heroImage}
           alt=""
-          width={720}
-          height={480}
+          widths={[360, 540, 720]}
+          sizes="(max-width: 600px) 100vw, (max-width: 920px) 50vw, 360px"
           class="card-img"
         />
       ) : (
