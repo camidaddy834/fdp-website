@@ -1,0 +1,55 @@
+# ───────────────────────────────────────────────────────────────────────────
+# Legacy Wix → new site  ·  301 permanent redirects
+#
+# Preserves Google rankings and inbound links after the fdp.org cutover from
+# the old Wix site. Old URLs were taken from the Wix sitemaps:
+#   /pages-sitemap.xml  and  /blog-posts-sitemap.xml
+#
+# These rules fire on whatever domain Netlify serves, so they also cover the
+# old domain IF foodservicedesignprofessionals.com is added as a domain alias
+# on this Netlify site (recommended — see docs/redirects.md).
+#
+# Netlify evaluates top-to-bottom, first match wins. Keep specific rules above
+# the wildcards. `301` = permanent (passes ranking signal to the new URL).
+# Note: /about is intentionally NOT redirected — the new site serves its own
+# About page there, which is the better match for that slug.
+# ───────────────────────────────────────────────────────────────────────────
+
+# ── Top-level pages ─────────────────────────────────────────────────────────
+/home                   /                         301
+/who-we-are             /about                    301
+/what-we-do-1           /capabilities             301
+/2nd-project            /capabilities             301   # old "Capability Statement" page
+/featured-projects      /portfolio                301
+/blog                   /news                     301
+/social                 /                         301   # no equivalent; social links live in the footer
+
+# ── Portfolio category pages ────────────────────────────────────────────────
+/corporate                  /portfolio/corporate/      301
+/copy-of-healthcare         /portfolio/health-care/    301
+/copy-of-higher-education   /portfolio/universities/   301
+/copy-of-casino-s           /portfolio/hospitality/    301
+/copy-of-casino-s-1         /portfolio/hospitality/    301
+/copy-of-culinary           /portfolio                 301   # old category ambiguous → portfolio index
+
+# ── Abandoned Wix template placeholders (demo content, no real project) ──────
+/3rd-project            /portfolio                301
+/4th-project            /portfolio                301
+/5th-project            /portfolio                301
+/6th-project            /portfolio                301
+
+# ── Blog posts  (/post/… → /news/…) ─────────────────────────────────────────
+/post/fdp-recently-published-in-the-fcsi-the-americas-magazine                                  /news/fdp-recently-published-in-the-fcsi-the-americas-magazine/   301
+/post/coppell-high-school-transformation                                                        /news/coppell-high-school-transformation/                         301
+/post/mercedes-benz-financial-services                                                          /news/mercedes-benz-financial-services/                           301
+/post/holland-hall-lessons-learnt                                                               /news/holland-hall-lessons-learnt/                                301
+/post/updated-and-celebrated                                                                    /news/updated-and-celebrated/                                     301
+/post/2016/08/01/wide-open-west                                                                 /news/wide-open-west/                                             301
+/post/2019/04/19/smooth-sleek-and-modern                                                        /news/smooth-sleek-and-modern/                                    301
+/post/2016/03/03/01                                                                             /news/northside-high-school-culinary/                             301
+/post/2016/03/02/how-we-do-it                                                                   /news/texas-architect-magazine/                                   301
+/post/2016/03/03/02                                                                             /news/fcsi-quarterly-showcase/                                    301
+/post/2017/02/04/foodservice-design-professionals-taking-the-next-steps-to-embrace-technology   /news/embracing-vr-technology/                                    301
+
+# ── Catch-all for any other legacy blog post not listed above ───────────────
+/post/*                 /news                     301
