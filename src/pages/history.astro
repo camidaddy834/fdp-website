@@ -88,19 +88,59 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
           <p class="fd-meta">{FOUNDER.articleMeta}</p>
           <p class="fd-text">{FOUNDER.blurb}</p>
           <p class="fd-pages-label">Read the original article</p>
-          <div class="fd-pages">
-            {
-              FOUNDER.pages.map((p, i) => (
-                <a class="fd-page" href={p.src} target="_blank" rel="noopener" aria-label={`Article page ${i + 1} of ${FOUNDER.pages.length}`}>
-                  <img src={p.thumb} alt={`Page ${i + 1}`} loading="lazy" />
-                </a>
-              ))
-            }
+          <div class="fd-reader">
+            <button class="fd-nav fd-prev" type="button" aria-label="Previous page">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul class="fd-track">
+              {
+                FOUNDER.pages.map((p, i) => (
+                  <li class="fd-slide">
+                    <img
+                      src={p.src}
+                      alt={`“${FOUNDER.articleTitle}” — page ${i + 1} of ${FOUNDER.pages.length}`}
+                      loading="lazy"
+                    />
+                  </li>
+                ))
+              }
+            </ul>
+            <button class="fd-nav fd-next" type="button" aria-label="Next page">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <script>
+    // Horizontal article reader: arrow buttons scroll one page at a time;
+    // native swipe / trackpad / scrollbar also work. Buttons disable at the ends.
+    document.querySelectorAll<HTMLElement>(".fd-reader").forEach((reader) => {
+      const track = reader.querySelector<HTMLElement>(".fd-track");
+      const prev = reader.querySelector<HTMLButtonElement>(".fd-prev");
+      const next = reader.querySelector<HTMLButtonElement>(".fd-next");
+      if (!track || !prev || !next) return;
+
+      const step = () => {
+        const slide = track.querySelector<HTMLElement>(".fd-slide");
+        const gap = parseFloat(getComputedStyle(track).columnGap || "16") || 16;
+        return slide ? slide.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
+      };
+      prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
+      next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
+
+      const update = () => {
+        const max = track.scrollWidth - track.clientWidth - 2;
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= max;
+      };
+      track.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      update();
+    });
+  </script>
 
   <!-- Archive -->
   <section class="section-tight archive">
@@ -196,14 +236,38 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
       font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
       color:var(--muted);margin:22px 0 10px;
     }
-    .fd-pages{display:flex;flex-wrap:wrap;gap:12px}
-    .fd-page{
-      display:block;width:92px;border-radius:8px;overflow:hidden;
-      border:1px solid var(--line);background:#f4f5f3;
-      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    /* Horizontal article reader (scroll-snap carousel) */
+    .fd-reader{position:relative}
+    .fd-track{
+      list-style:none;margin:0;padding:4px 2px 14px;
+      display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent;
+      overscroll-behavior-x:contain;
     }
-    .fd-page:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--line-strong)}
-    .fd-page img{width:100%;height:auto;display:block}
+    .fd-track::-webkit-scrollbar{height:8px}
+    .fd-track::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:8px}
+    .fd-slide{
+      flex:0 0 auto;height:clamp(360px,62vh,600px);scroll-snap-align:center;
+      border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#f4f5f3;
+      box-shadow:var(--shadow-sm);
+    }
+    .fd-slide img{height:100%;width:auto;display:block}
+    .fd-nav{
+      position:absolute;top:calc(50% - 7px);transform:translateY(-50%);z-index:3;
+      width:44px;height:44px;border-radius:50%;border:1px solid var(--line-strong);
+      background:rgba(255,255,255,.94);color:var(--accent-ink);
+      display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow-lg);
+      transition:background .15s ease, opacity .15s ease;
+    }
+    .fd-nav svg{width:22px;height:22px}
+    .fd-nav:hover{background:#fff}
+    .fd-nav:disabled{opacity:.3;cursor:default}
+    .fd-prev{left:-10px}
+    .fd-next{right:-10px}
+    @media (max-width:480px){
+      .fd-prev{left:2px}
+      .fd-next{right:2px}
+    }
 
     @media (max-width:760px){
       .fd-grid{grid-template-columns:1fr}
