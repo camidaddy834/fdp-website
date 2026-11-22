@@ -107,6 +107,9 @@ import { VERTICALS } from "../content.config";
     @media (max-width:560px){.proposal-cta{flex-direction:column;align-items:flex-start}.pc-btn{width:100%;justify-content:center}}
     .contact-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(30px,5vw,60px);align-items:start}
     .form{display:flex;flex-direction:column;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg);padding:clamp(24px,3vw,36px);box-shadow:var(--shadow-sm)}
+    /* Offset the #proposal-form anchor target so the sticky 76px header
+       (66px on mobile) doesn't cover the form heading when deep-linked. */
+    #proposal-form{scroll-margin-top:92px}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     label{display:flex;flex-direction:column;gap:6px;font-family:var(--font-display);font-weight:600;font-size:.9rem;color:var(--ink)}
     .req{color:var(--accent);font-weight:700}
