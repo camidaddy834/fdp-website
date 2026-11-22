@@ -2,7 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { HISTORY } from "../data/company";
+import { HISTORY, FOUNDER } from "../data/company";
 import { SITE } from "../data/site";
 
 const { intro, milestones, headline } = HISTORY;
@@ -61,6 +61,44 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
           ))
         }
       </ol>
+    </div>
+  </section>
+
+  <!-- From the founder -->
+  <section class="section-tight founder">
+    <div class="container">
+      <div class="fd-grid">
+        <aside class="fd-card">
+          <img
+            class="fd-portrait"
+            src={FOUNDER.portrait}
+            alt={`Portrait of ${FOUNDER.name}`}
+            width="358"
+            height="348"
+            loading="lazy"
+          />
+          <p class="fd-name">{FOUNDER.name}</p>
+          <p class="fd-role">{FOUNDER.role}</p>
+        </aside>
+        <div class="fd-body">
+          <p class="eyebrow">{FOUNDER.eyebrow}</p>
+          <h2 class="fd-title">
+            &ldquo;{FOUNDER.articleTitle}&rdquo;
+          </h2>
+          <p class="fd-meta">{FOUNDER.articleMeta}</p>
+          <p class="fd-text">{FOUNDER.blurb}</p>
+          <p class="fd-pages-label">Read the original article</p>
+          <div class="fd-pages">
+            {
+              FOUNDER.pages.map((p, i) => (
+                <a class="fd-page" href={p.src} target="_blank" rel="noopener" aria-label={`Article page ${i + 1} of ${FOUNDER.pages.length}`}>
+                  <img src={p.thumb} alt={`Page ${i + 1}`} loading="lazy" />
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -136,6 +174,41 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
     }
     .tl-title{font-family:var(--font-display);font-weight:700;font-size:1.2rem;margin:0 0 6px}
     .tl-text{color:var(--ink-soft);font-size:1rem;line-height:1.6;max-width:52ch}
+
+    /* From the founder */
+    .founder{border-top:1px solid var(--line)}
+    .fd-grid{display:grid;grid-template-columns:260px 1fr;gap:clamp(28px,5vw,56px);align-items:start}
+    .fd-card{
+      position:sticky;top:96px;
+      border:1px solid var(--line);border-radius:var(--radius-lg);
+      background:var(--steel-wash);padding:18px;text-align:center;
+    }
+    .fd-portrait{
+      width:100%;height:auto;display:block;border-radius:var(--radius);
+      filter:grayscale(1) contrast(1.02);background:#e9ebe6;
+    }
+    .fd-name{font-family:var(--font-display);font-weight:800;font-size:1.12rem;margin:14px 0 2px}
+    .fd-role{font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+    .fd-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin:6px 0 4px;line-height:1.15}
+    .fd-meta{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--muted);margin-bottom:16px}
+    .fd-text{color:var(--ink-soft);font-size:1.02rem;line-height:1.7;max-width:62ch}
+    .fd-pages-label{
+      font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+      color:var(--muted);margin:22px 0 10px;
+    }
+    .fd-pages{display:flex;flex-wrap:wrap;gap:12px}
+    .fd-page{
+      display:block;width:92px;border-radius:8px;overflow:hidden;
+      border:1px solid var(--line);background:#f4f5f3;
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .fd-page:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--line-strong)}
+    .fd-page img{width:100%;height:auto;display:block}
+
+    @media (max-width:760px){
+      .fd-grid{grid-template-columns:1fr}
+      .fd-card{position:static;max-width:300px;margin:0 auto}
+    }
 
     /* Archive */
     .sec-head{margin-bottom:14px}
