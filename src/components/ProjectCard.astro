@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import { VERTICAL_META } from "../data/site";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -8,12 +7,13 @@ interface Props {
 }
 const { project } = Astro.props;
 const d = project.data;
-const meta = VERTICAL_META[d.sector];
+// Show a real metric when we have one; never fall back to the sector label
+// (project classification is intentionally omitted from cards).
 const stat = d.squareFeet
   ? `${d.squareFeet.toLocaleString()} sq ft`
   : d.seats
     ? `${d.seats.toLocaleString()} seats`
-    : meta.label;
+    : null;
 ---
 
 <a href={`/work/${project.id}/`} class="card">
@@ -39,7 +39,7 @@ const stat = d.squareFeet
     <p class="card-summary">{d.summary}</p>
     <div class="card-meta">
       <span class="card-loc">{d.location}</span>
-      <span class="card-stat tabular">{stat}</span>
+      {stat && <span class="card-stat tabular">{stat}</span>}
     </div>
   </div>
 </a>

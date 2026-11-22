@@ -1,8 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { CAPABILITIES, CERTIFICATIONS } from "../data/company";
-import { VERTICAL_META } from "../data/site";
-import { VERTICALS } from "../content.config";
 ---
 
 <BaseLayout title="Capabilities" description="FDP capabilities statement — core competencies, sectors served, certifications, and company snapshot.">
@@ -62,22 +60,6 @@ import { VERTICALS } from "../content.config";
     </div>
   </section>
 
-  <!-- Sectors -->
-  <section class="section-tight cap-sectors">
-    <div class="container">
-      <h2 class="cap-h center">Sectors we serve</h2>
-      <div class="sector-row">
-        {
-          VERTICALS.map((v) => (
-            <a href={`/portfolio/${v}/`} class="sector-pill">
-              {VERTICAL_META[v].label}
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
   <!-- Certifications -->
   <section class="section-tight">
     <div class="container">
@@ -126,14 +108,6 @@ import { VERTICALS } from "../content.config";
     .snap-row dd{margin:0;font-weight:600;text-align:right;color:var(--ink)}
     @media (max-width:860px){.cap-grid{grid-template-columns:1fr}}
 
-    .cap-sectors{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-    .sector-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-    .sector-pill{
-      text-decoration:none;color:var(--ink);font-family:var(--font-display);font-weight:600;
-      background:var(--ground);border:1px solid var(--line-strong);border-radius:24px;padding:10px 20px;
-      transition:border-color .15s ease, color .15s ease;
-    }
-    .sector-pill:hover{border-color:var(--accent);color:var(--accent-ink)}
 
     .cert-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px}
     .cert-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}

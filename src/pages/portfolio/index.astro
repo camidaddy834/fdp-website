@@ -46,6 +46,17 @@ const counts = Object.fromEntries(
     </div>
   </section>
 
+  <!-- Full breadth of markets served (plain list; the chips above filter the
+       sectors that have published projects). -->
+  <section class="section-tight sectors">
+    <div class="container">
+      <h2 class="sectors-h">Sectors we serve</h2>
+      <ul class="sector-list">
+        {VERTICALS.map((v) => <li>{VERTICAL_META[v].label}</li>)}
+      </ul>
+    </div>
+  </section>
+
   <style>
     .page-head{padding:clamp(48px,7vw,86px) 0 10px}
     .page-title{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;margin:16px 0 16px}
@@ -63,5 +74,19 @@ const counts = Object.fromEntries(
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
     @media (max-width:920px){.grid{grid-template-columns:1fr 1fr}}
     @media (max-width:600px){.grid{grid-template-columns:1fr}}
+
+    .sectors{border-top:1px solid var(--line)}
+    .sectors-h{font-size:clamp(1.3rem,2.6vw,1.7rem);font-weight:800;margin-bottom:22px}
+    .sector-list{
+      list-style:none;margin:0;padding:0;
+      display:grid;grid-template-columns:repeat(3,1fr);gap:10px 24px;max-width:760px;
+    }
+    .sector-list li{
+      font-family:var(--font-display);font-weight:600;font-size:1.08rem;color:var(--ink);
+      padding-left:16px;position:relative;
+    }
+    .sector-list li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+    @media (max-width:720px){.sector-list{grid-template-columns:1fr 1fr}}
+    @media (max-width:460px){.sector-list{grid-template-columns:1fr}}
   </style>
 </BaseLayout>

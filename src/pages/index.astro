@@ -91,25 +91,18 @@ const featured = projects
       <div class="sec-head">
         <div>
           <p class="eyebrow">Our work</p>
-          <h2 class="sec-title">Explore work by sector</h2>
+          <h2 class="sec-title">Markets we serve</h2>
         </div>
         <p class="sec-note">
-          A selection of the markets we serve — each backed by the same rigor:
-          master planning, food service design, and equipment specification,
-          tuned to the demands of the environment.
+          We design food service facilities across a broad range of markets —
+          each backed by the same rigor: master planning, food service design,
+          and equipment specification, tuned to the demands of the environment.
         </p>
       </div>
-      <div class="verticals">
-        {
-          VERTICALS.map((slug) => (
-            <a href={`/portfolio/${slug}/`} class="vert">
-              <h3 class="vert-label">{VERTICAL_META[slug].label}</h3>
-              <p class="vert-blurb">{VERTICAL_META[slug].blurb}</p>
-              <span class="vert-go">View projects →</span>
-            </a>
-          ))
-        }
-      </div>
+      <ul class="sector-list">
+        {VERTICALS.map((slug) => <li>{VERTICAL_META[slug].label}</li>)}
+      </ul>
+      <a href="/portfolio" class="sec-link sector-explore">Explore the portfolio →</a>
     </div>
   </section>
 
@@ -205,18 +198,21 @@ const featured = projects
     .sec-link:hover{text-decoration:underline}
 
     /* Verticals */
-    .verticals{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .vert{
-      display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;
-      background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
-      padding:26px 24px;transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    /* Plain, non-linked list of the markets we serve (full interactive
+       sector browsing lives on the Portfolio page). */
+    .sector-list{
+      list-style:none;margin:0;padding:0;
+      display:grid;grid-template-columns:repeat(3,1fr);gap:10px 24px;
+      border-top:1px solid var(--line);padding-top:26px;
     }
-    .vert:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-strong)}
-    .vert-label{font-size:1.32rem;font-weight:700}
-    .vert-blurb{color:var(--ink-soft);font-size:.96rem;flex:1}
-    .vert-go{font-family:var(--font-display);font-weight:600;font-size:.9rem;color:var(--steel-ink);margin-top:6px}
-    @media (max-width:860px){.verticals{grid-template-columns:1fr 1fr}}
-    @media (max-width:560px){.verticals{grid-template-columns:1fr}}
+    .sector-list li{
+      font-family:var(--font-display);font-weight:600;font-size:1.1rem;color:var(--ink);
+      padding-left:16px;position:relative;
+    }
+    .sector-list li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+    .sector-explore{display:inline-block;margin-top:24px}
+    @media (max-width:860px){.sector-list{grid-template-columns:1fr 1fr}}
+    @media (max-width:560px){.sector-list{grid-template-columns:1fr}}
 
     /* Work */
     .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
