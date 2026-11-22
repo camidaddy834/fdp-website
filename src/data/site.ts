@@ -15,6 +15,22 @@ export const SITE = {
   gtmId: "GTM-TMHTCZNM",
 };
 
+/** Social profiles, shown in the footer. */
+export const SOCIAL = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/foodservice-design-professionals/",
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/foodservicedesignprofessionals",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/foodservicedesignprofessionals/",
+  },
+] as const;
+
 /** Two offices — Dallas & Houston (San Antonio/Austin retired in the redesign).
  *  The structured street/locality/region/postal fields feed the LocalBusiness
  *  JSON-LD in BaseLayout; `address` is the human-readable line used in the footer. */

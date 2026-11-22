@@ -51,7 +51,10 @@ for f in "$SRC"/*.jpg "$SRC"/*.jpeg "$SRC"/*.png "$SRC"/*.pdf; do
   sips -Z 2600 -s format jpeg -s formatOptions 72 "$src" --out "$OUT/$slug.jpg" >/dev/null 2>&1
   deg="$(get_rot "$slug")"
   [ -n "$deg" ] && sips -r "$deg" "$OUT/$slug.jpg" >/dev/null 2>&1
-  # thumbnail is generated from the (already-rotated) full view
+  # Trim the blank paper margin down to the drawing (and bake orientation).
+  # Needs python3 + Pillow + numpy; skipped harmlessly if unavailable.
+  python3 "$root/scripts/history-crop.py" "$OUT/$slug.jpg" >/dev/null 2>&1 || true
+  # thumbnail is generated from the (already-rotated, cropped) full view
   sips -Z 1000 -s format jpeg -s formatOptions 60 "$OUT/$slug.jpg" --out "$THUMB/$slug.jpg" >/dev/null 2>&1
   count=$((count+1))
 done
