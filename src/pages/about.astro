@@ -6,15 +6,19 @@ import { CERTIFICATIONS, TEAM } from "../data/company";
 const approach = [
   {
     h: "Master planning",
-    p: "We start with flow — people, food, and waste — and plan the facility around how it will actually run, not just how it looks on a floor plate.",
+    p: "We start with flow — people, food, and waste — and plan the facility around how it will actually run, not just how it looks on a floor plate. Program, throughput, and adjacencies are settled before a single line is drawn, so every decision that follows is grounded in how the operation works.",
   },
   {
     h: "Food service design",
-    p: "Detailed kitchen and servery design, coordinated with architecture, MEP, and your operators so nothing gets value-engineered into a bottleneck.",
+    p: "Detailed kitchen and servery design, coordinated with architecture, MEP, and your operators so nothing gets value-engineered into a bottleneck. We develop the plans, elevations, and utility rough-in requirements that keep every trade building from the same current set.",
   },
   {
     h: "Equipment specification",
-    p: "A complete, biddable equipment package — schedules, cut sheets, and utility requirements — that protects your budget through procurement.",
+    p: "A complete, biddable equipment package — schedules, cut sheets, and utility requirements — that protects your budget through procurement. Specifications are written to bid competitively while holding the performance, durability, and code compliance the operation depends on.",
+  },
+  {
+    h: "Bidding & construction support",
+    p: "We stay engaged through bidding and construction — reviewing bids and submittals, checking shop drawings, and observing installation — so what gets built matches what was designed, right through to opening day.",
   },
 ];
 
@@ -63,7 +67,13 @@ function initials(name: string): string {
   <!-- Approach -->
   <section class="section-tight">
     <div class="container">
-      <h2 class="eyebrow" style="margin-bottom:24px">How we work</h2>
+      <h2 class="eyebrow">How we work</h2>
+      <p class="ap-lede">
+        Every project runs through the same disciplined process — from the first
+        flow diagram to the final piece of equipment. It's how we protect your
+        budget and your schedule, and how we make sure the kitchen works the way
+        it was meant to on opening day.
+      </p>
       <div class="approach">
         {
           approach.map((a) => (
@@ -166,11 +176,12 @@ function initials(name: string): string {
     @media (max-width:760px){.values{grid-template-columns:1fr}}
 
     /* Approach */
-    .approach{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .ap-lede{color:var(--ink-soft);font-size:1.08rem;line-height:1.7;max-width:64ch;margin:0 0 28px}
+    .approach{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
     .ap{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px;display:flex;flex-direction:column;gap:10px}
     .ap-h{font-size:1.35rem;font-weight:700}
-    .ap-p{color:var(--ink-soft);font-size:.98rem}
-    @media (max-width:860px){.approach{grid-template-columns:1fr}}
+    .ap-p{color:var(--ink-soft);font-size:.98rem;line-height:1.6}
+    @media (max-width:720px){.approach{grid-template-columns:1fr}}
 
     /* Certifications */
     .certs{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
