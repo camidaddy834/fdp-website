@@ -81,6 +81,19 @@ export const FOUNDER = {
     { src: "/history/founder/article-4.jpg", thumb: "/history/founder/thumbs/article-4.jpg" },
     { src: "/history/founder/article-5.jpg", thumb: "/history/founder/thumbs/article-5.jpg" },
   ],
+  // Photographs of H. G. Rice & Company's built work — mid-century diners,
+  // cafeterias, soda fountains, hotel kitchens and bars from the firm's archive.
+  // Assets in /public/history/founder/work/ (full) + /work/thumbs/.
+  workHeading: "The work of H. G. Rice & Company",
+  workBlurb:
+    "A selection of mid-century food service installations from the H. G. Rice & Company archive — the lunch counters, cafeterias, soda fountains, hotel kitchens and bars the firm designed and equipped across the Southwest. Select any photograph to enlarge it.",
+  work: Array.from({ length: 16 }, (_, i) => {
+    const n = String(i + 1).padStart(2, "0");
+    return {
+      src: `/history/founder/work/work-${n}.jpg`,
+      thumb: `/history/founder/work/thumbs/work-${n}.jpg`,
+    };
+  }),
 };
 
 /**

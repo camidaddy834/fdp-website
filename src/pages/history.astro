@@ -88,7 +88,7 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
           <p class="fd-meta">{FOUNDER.articleMeta}</p>
           <p class="fd-text">{FOUNDER.blurb}</p>
           <p class="fd-pages-label">Read the original article</p>
-          <div class="fd-reader">
+          <div class="fd-reader fd-gallery">
             <button class="fd-nav fd-prev" type="button" aria-label="Previous page">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -121,6 +121,31 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
           </div>
         </div>
       </div>
+
+      <!-- Built-work photo gallery -->
+      <div class="fd-work">
+        <h3 class="fd-work-title">{FOUNDER.workHeading}</h3>
+        <p class="fd-work-blurb">{FOUNDER.workBlurb}</p>
+        <ul class="fd-work-grid fd-gallery">
+          {
+            FOUNDER.work.map((p, i) => (
+              <li class="fd-work-item">
+                <button
+                  class="fd-zoom"
+                  type="button"
+                  data-src={p.src}
+                  aria-label={`Enlarge photograph ${i + 1} of ${FOUNDER.work.length}`}
+                >
+                  <img src={p.thumb} alt={`H. G. Rice & Company built work, photograph ${i + 1}`} loading="lazy" />
+                  <span class="fd-zoom-hint" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  </span>
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
 
     <!-- Lightbox (click-to-zoom reader) -->
@@ -144,7 +169,7 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
       <button class="fdlb-btn fdlb-next" type="button" aria-label="Next page">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <p class="fdlb-counter"><span class="fdlb-cur">1</span> / {FOUNDER.pages.length}</p>
+      <p class="fdlb-counter"><span class="fdlb-cur">1</span> / <span class="fdlb-total">{FOUNDER.pages.length}</span></p>
     </div>
   </section>
 
@@ -175,31 +200,35 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
       update();
     });
 
-    // Click-to-zoom lightbox
+    // Click-to-zoom lightbox — shared across every .fd-gallery on the page.
     (() => {
       const lb = document.getElementById("fdLightbox");
       if (!lb) return;
       const img = lb.querySelector<HTMLImageElement>(".fdlb-img");
       const counter = lb.querySelector<HTMLElement>(".fdlb-cur");
+      const total = lb.querySelector<HTMLElement>(".fdlb-total");
       const btnClose = lb.querySelector<HTMLButtonElement>(".fdlb-close");
       const btnPrev = lb.querySelector<HTMLButtonElement>(".fdlb-prev");
       const btnNext = lb.querySelector<HTMLButtonElement>(".fdlb-next");
-      const zooms = Array.from(document.querySelectorAll<HTMLButtonElement>(".fd-zoom"));
-      if (!img || !zooms.length) return;
+      const galleries = Array.from(document.querySelectorAll<HTMLElement>(".fd-gallery"));
+      if (!img || !galleries.length) return;
 
-      const sources = zooms.map((z) => z.dataset.src || "");
+      let sources: string[] = [];
       let index = 0;
       let lastFocus: HTMLElement | null = null;
 
       const show = (i: number) => {
+        if (!sources.length) return;
         index = (i + sources.length) % sources.length;
         img.classList.remove("zoomed");
         img.src = sources[index];
-        img.alt = `Article page ${index + 1} of ${sources.length}`;
+        img.alt = `Image ${index + 1} of ${sources.length}`;
         if (counter) counter.textContent = String(index + 1);
+        if (total) total.textContent = String(sources.length);
       };
 
-      const open = (i: number) => {
+      const open = (set: string[], i: number) => {
+        sources = set;
         lastFocus = document.activeElement as HTMLElement;
         show(i);
         lb.hidden = false;
@@ -213,7 +242,11 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
         lastFocus?.focus();
       };
 
-      zooms.forEach((z, i) => z.addEventListener("click", () => open(i)));
+      galleries.forEach((gallery) => {
+        const zooms = Array.from(gallery.querySelectorAll<HTMLButtonElement>(".fd-zoom"));
+        const set = zooms.map((z) => z.dataset.src || "");
+        zooms.forEach((z, i) => z.addEventListener("click", () => open(set, i)));
+      });
       btnClose?.addEventListener("click", close);
       btnPrev?.addEventListener("click", () => show(index - 1));
       btnNext?.addEventListener("click", () => show(index + 1));
@@ -356,8 +389,24 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
       backdrop-filter:blur(3px);pointer-events:none;
     }
     .fd-zoom-hint svg{width:18px;height:18px}
-    .fd-slide:hover .fd-zoom-hint,
+    .fd-zoom:hover .fd-zoom-hint,
     .fd-zoom:focus-visible .fd-zoom-hint{opacity:1;transform:translateY(0)}
+
+    /* Built-work photo gallery */
+    .fd-work{margin-top:clamp(40px,6vw,64px);border-top:1px solid var(--line);padding-top:clamp(28px,4vw,44px)}
+    .fd-work-title{font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:800;margin:0 0 8px}
+    .fd-work-blurb{color:var(--ink-soft);max-width:66ch;margin:0 0 22px;font-size:1.02rem;line-height:1.6}
+    .fd-work-grid{list-style:none;margin:0;padding:0;column-count:3;column-gap:14px}
+    .fd-work-item{margin:0 0 14px;break-inside:avoid;-webkit-column-break-inside:avoid}
+    .fd-work-item .fd-zoom{
+      height:auto;width:100%;border-radius:10px;overflow:hidden;
+      border:1px solid var(--line);background:#f4f5f3;box-shadow:var(--shadow-sm);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .fd-work-item .fd-zoom:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--line-strong)}
+    .fd-work-item .fd-zoom img{width:100%;height:auto;display:block}
+    @media (max-width:860px){.fd-work-grid{column-count:2}}
+    @media (max-width:520px){.fd-work-grid{column-count:1}}
     .fd-nav{
       position:absolute;top:calc(50% - 7px);transform:translateY(-50%);z-index:3;
       width:44px;height:44px;border-radius:50%;border:1px solid var(--line-strong);
