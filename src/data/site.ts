@@ -63,7 +63,7 @@ export const VERTICAL_META: Record<
       "Food service for public agencies and civic facilities — built to code, budget, and public accountability.",
   },
   corporate: {
-    label: "Corporate",
+    label: "Business and Industry",
     blurb:
       "Employee cafés and executive dining that make the workplace a destination.",
   },
@@ -83,7 +83,7 @@ export const VERTICAL_META: Record<
       "Concessions, clubs, and premium dining for stadiums, arenas, and event venues.",
   },
   universities: {
-    label: "Universities",
+    label: "Higher Education",
     blurb:
       "Dining halls, retail venues, and teaching kitchens that keep pace with campus life.",
   },
@@ -124,6 +124,7 @@ export const NAV: NavItem[] = [
       { label: "History", href: "/history" },
     ],
   },
+  { label: "Team", href: "/team" },
   {
     label: "Portfolio",
     href: "/portfolio",
@@ -132,8 +133,7 @@ export const NAV: NavItem[] = [
       { label: "Testimonials", href: "/testimonials" },
     ],
   },
-  { label: "Capabilities", href: "/capabilities" },
-  { label: "Team", href: "/team" },
   { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
+  { label: "Capabilities", href: "/capabilities" },
 ];

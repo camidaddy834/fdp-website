@@ -8,7 +8,7 @@
   --ground:#f2f4f7;
   --paper:#ffffff;
   --ink:#141b28;
-  --ink-soft:#3b445a;
+  --ink-soft:#2f3647;  /* darkened for stronger body lettering on white */
   --muted:#626a7a;   /* darkened from #6a7284 to meet WCAG AA (4.5:1) on --ground */
   --line:#e2e5eb;
   --line-strong:#c6ccd7;

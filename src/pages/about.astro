@@ -5,17 +5,14 @@ import { CERTIFICATIONS, TEAM } from "../data/company";
 
 const approach = [
   {
-    n: "01",
     h: "Master planning",
     p: "We start with flow — people, food, and waste — and plan the facility around how it will actually run, not just how it looks on a floor plate.",
   },
   {
-    n: "02",
     h: "Food service design",
     p: "Detailed kitchen and servery design, coordinated with architecture, MEP, and your operators so nothing gets value-engineered into a bottleneck.",
   },
   {
-    n: "03",
     h: "Equipment specification",
     p: "A complete, biddable equipment package — schedules, cut sheets, and utility requirements — that protects your budget through procurement.",
   },
@@ -71,7 +68,6 @@ function initials(name: string): string {
         {
           approach.map((a) => (
             <div class="ap">
-              <span class="ap-n tabular">{a.n}</span>
               <h3 class="ap-h">{a.h}</h3>
               <p class="ap-p">{a.p}</p>
             </div>
@@ -172,7 +168,6 @@ function initials(name: string): string {
     /* Approach */
     .approach{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
     .ap{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px;display:flex;flex-direction:column;gap:10px}
-    .ap-n{font-family:var(--font-mono);font-size:13px;color:var(--accent);font-weight:600}
     .ap-h{font-size:1.35rem;font-weight:700}
     .ap-p{color:var(--ink-soft);font-size:.98rem}
     @media (max-width:860px){.approach{grid-template-columns:1fr}}

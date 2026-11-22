@@ -101,11 +101,8 @@ const featured = projects
       </div>
       <div class="verticals">
         {
-          VERTICALS.map((slug, i) => (
+          VERTICALS.map((slug) => (
             <a href={`/portfolio/${slug}/`} class="vert">
-              <span class="vert-idx tabular">
-                {String(i + 1).padStart(2, "0")}
-              </span>
               <h3 class="vert-label">{VERTICAL_META[slug].label}</h3>
               <p class="vert-blurb">{VERTICAL_META[slug].blurb}</p>
               <span class="vert-go">View projects →</span>
@@ -215,7 +212,6 @@ const featured = projects
       padding:26px 24px;transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
     }
     .vert:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-strong)}
-    .vert-idx{font-family:var(--font-mono);font-size:12px;color:var(--accent);font-weight:600}
     .vert-label{font-size:1.32rem;font-weight:700}
     .vert-blurb{color:var(--ink-soft);font-size:.96rem;flex:1}
     .vert-go{font-family:var(--font-display);font-weight:600;font-size:.9rem;color:var(--steel-ink);margin-top:6px}
