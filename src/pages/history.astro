@@ -15,7 +15,7 @@ let media: Media[] = [];
 try {
   media = fs
     .readdirSync(path.resolve("public/history"))
-    .filter((f) => /\.jpe?g$/i.test(f))
+    .filter((f) => /\.webp$/i.test(f))
     .sort()
     .map((f) => ({
       src: encodeURI(`/history/${f}`),

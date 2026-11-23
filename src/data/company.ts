@@ -68,18 +68,18 @@ export const HISTORY = {
 export const FOUNDER = {
   name: "H. G. (Gene) Rice",
   role: "Founder, H. G. Rice & Company (1967)",
-  portrait: "/history/founder/gene-rice.jpg",
+  portrait: "/history/founder/gene-rice.webp",
   eyebrow: "From the founder",
   articleTitle: "Selling… with Pencil & Paper",
   articleMeta: "Foodservice Equipment Dealer / Layout & Design · December 1972",
   blurb:
     "A graduate of Oklahoma State University in mechanical engineering, Gene Rice spent more than 20 years designing food service installations across the Southwest before founding H. G. Rice & Company — the firm whose lineage runs through to FDP today. In this 1972 article he laid out the freehand perspective-sketch method his team used to bring preliminary designs to life for clients: \"Simple to do, perspective sketches insure customer understanding, save designer time.\" Six decades on, the tools have changed — Revit, 3D renderings, VR — but the idea hasn't: help the client see it before it's built.",
   pages: [
-    { src: "/history/founder/article-1.jpg", thumb: "/history/founder/thumbs/article-1.jpg" },
-    { src: "/history/founder/article-2.jpg", thumb: "/history/founder/thumbs/article-2.jpg" },
-    { src: "/history/founder/article-3.jpg", thumb: "/history/founder/thumbs/article-3.jpg" },
-    { src: "/history/founder/article-4.jpg", thumb: "/history/founder/thumbs/article-4.jpg" },
-    { src: "/history/founder/article-5.jpg", thumb: "/history/founder/thumbs/article-5.jpg" },
+    { src: "/history/founder/article-1.webp", thumb: "/history/founder/thumbs/article-1.webp" },
+    { src: "/history/founder/article-2.webp", thumb: "/history/founder/thumbs/article-2.webp" },
+    { src: "/history/founder/article-3.webp", thumb: "/history/founder/thumbs/article-3.webp" },
+    { src: "/history/founder/article-4.webp", thumb: "/history/founder/thumbs/article-4.webp" },
+    { src: "/history/founder/article-5.webp", thumb: "/history/founder/thumbs/article-5.webp" },
   ],
   // Photographs of H. G. Rice & Company's built work — mid-century diners,
   // cafeterias, soda fountains, hotel kitchens and bars from the firm's archive.
@@ -90,8 +90,8 @@ export const FOUNDER = {
   work: Array.from({ length: 16 }, (_, i) => {
     const n = String(i + 1).padStart(2, "0");
     return {
-      src: `/history/founder/work/work-${n}.jpg`,
-      thumb: `/history/founder/work/thumbs/work-${n}.jpg`,
+      src: `/history/founder/work/work-${n}.webp`,
+      thumb: `/history/founder/work/thumbs/work-${n}.webp`,
     };
   }),
 };

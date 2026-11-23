@@ -6,10 +6,10 @@
 #
 # Reads full-resolution scans from  history-originals/  (git-ignored, kept
 # local — NOT deployed) and writes, for each one, into public/history/:
-#   <slug>.jpg          web-optimized full view (~2600px, the click target)
-#   thumbs/<slug>.jpg   small grid thumbnail (~1000px)
+#   <slug>.webp         web-optimized full view (~2600px, the click target)
+#   thumbs/<slug>.webp  small grid thumbnail (~1000px)
 #
-# The History page auto-discovers public/history/*.jpg, so after running this
+# The History page auto-discovers public/history/*.webp, so after running this
 # the new drawings appear automatically. Add scans to history-originals/ and
 # re-run. Uses macOS built-ins: sips (images) and qlmanage (PDF first page).
 set -e
@@ -30,7 +30,7 @@ if [ ! -d "$SRC" ] || [ -z "$(ls -A "$SRC" 2>/dev/null)" ]; then
 fi
 
 # Clear previously generated outputs (regenerated below)
-rm -f "$OUT"/*.jpg "$THUMB"/*.jpg
+rm -f "$OUT"/*.jpg "$THUMB"/*.jpg "$OUT"/*.webp "$THUMB"/*.webp
 tmp="$(mktemp -d)"
 shopt -s nullglob nocaseglob
 count=0
@@ -48,14 +48,14 @@ for f in "$SRC"/*.jpg "$SRC"/*.jpeg "$SRC"/*.png "$SRC"/*.pdf; do
   fi
   [ -f "$src" ] || { echo "  ! could not render $bn — skipped"; continue; }
 
-  sips -Z 2600 -s format jpeg -s formatOptions 72 "$src" --out "$OUT/$slug.jpg" >/dev/null 2>&1
+  # Resize + rotate into a temp JPG (sips), then crop + export WebP (full + thumb).
+  sips -Z 2600 -s format jpeg -s formatOptions 92 "$src" --out "$tmp/$slug.jpg" >/dev/null 2>&1
   deg="$(get_rot "$slug")"
-  [ -n "$deg" ] && sips -r "$deg" "$OUT/$slug.jpg" >/dev/null 2>&1
-  # Trim the blank paper margin down to the drawing (and bake orientation).
-  # Needs python3 + Pillow + numpy; skipped harmlessly if unavailable.
-  python3 "$root/scripts/history-crop.py" "$OUT/$slug.jpg" >/dev/null 2>&1 || true
-  # thumbnail is generated from the (already-rotated, cropped) full view
-  sips -Z 1000 -s format jpeg -s formatOptions 60 "$OUT/$slug.jpg" --out "$THUMB/$slug.jpg" >/dev/null 2>&1
+  [ -n "$deg" ] && sips -r "$deg" "$tmp/$slug.jpg" >/dev/null 2>&1
+  # Trim the blank paper margin to the drawing, bake orientation, and write
+  # a WebP full view + WebP thumbnail. Requires python3 + Pillow + numpy.
+  python3 "$root/scripts/history-crop.py" "$tmp/$slug.jpg" "$OUT/$slug.webp" "$THUMB/$slug.webp" >/dev/null 2>&1 \
+    || { echo "  ! could not process $bn (need python3 + Pillow + numpy) — skipped"; continue; }
   count=$((count+1))
 done
 
