@@ -29,3 +29,15 @@ hgr-archive000020 90
 hgr-archive000021 90
 hgr-archive000022 90
 hgr-archive000023 90
+# The 000024–000033 batch was scanned the opposite way (90 CW), so it needs a
+# left / counter-clockwise turn to sit upright: 270 clockwise.
+hgr-archive000024 270
+hgr-archive000025 270
+hgr-archive000026 270
+hgr-archive000027 270
+hgr-archive000028 270
+hgr-archive000029 270
+hgr-archive000030 270
+hgr-archive000031 270
+hgr-archive000032 270
+hgr-archive000033 270
