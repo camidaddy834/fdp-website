@@ -123,10 +123,22 @@ function initials(name: string): string {
         </p>
         <a href="/team" class="btn btn-primary">Meet the team</a>
       </div>
-      <div class="tt-faces" aria-hidden="true">
+      <div class="tt-leads">
         {
           TEAM.members.filter((m) => m.lead).map((m) => (
-            <div class="monogram tt-face"><span>{initials(m.name)}</span></div>
+            <article class="tt-lead">
+              <div class="monogram tt-avatar" aria-hidden="true">
+                <span>{initials(m.name)}</span>
+              </div>
+              <div class="tt-lead-body">
+                <h3 class="tt-lead-name">{m.name}</h3>
+                <p class="tt-lead-title">
+                  {m.title}
+                  {m.location && <span class="tt-lead-loc"> · {m.location}</span>}
+                </p>
+                {m.bio && <p class="tt-lead-bio">{m.bio}</p>}
+              </div>
+            </article>
           ))
         }
       </div>
@@ -193,11 +205,20 @@ function initials(name: string): string {
     @media (max-width:760px){.cert-row{grid-template-columns:1fr 1fr}}
 
     /* Team teaser */
-    .team-teaser{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
+    .team-teaser{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(32px,5vw,56px);align-items:start}
     .tt-lede{color:var(--ink-soft);font-size:1.05rem;max-width:46ch;margin:14px 0 22px}
-    .tt-faces{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .tt-face{font-size:1.6rem}
-    @media (max-width:760px){.team-teaser{grid-template-columns:1fr}.tt-faces{max-width:280px}}
+    .tt-leads{display:flex;flex-direction:column;gap:22px}
+    .tt-lead{display:grid;grid-template-columns:60px 1fr;gap:18px;align-items:start}
+    .tt-avatar{width:60px;font-size:1.15rem;flex:none}
+    .tt-lead-name{font-family:var(--font-display);font-weight:800;font-size:1.18rem;margin:2px 0 2px}
+    .tt-lead-title{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:8px}
+    .tt-lead-loc{color:var(--muted)}
+    .tt-lead-bio{color:var(--ink-soft);font-size:.98rem;line-height:1.6;max-width:52ch}
+    @media (max-width:760px){
+      .team-teaser{grid-template-columns:1fr}
+      .tt-lead{grid-template-columns:52px 1fr;gap:14px}
+      .tt-avatar{width:52px}
+    }
 
     /* Offices */
     .off-head{margin-bottom:36px}
