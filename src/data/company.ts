@@ -87,8 +87,10 @@ export const FOUNDER = {
   workHeading: "The work of H. G. Rice & Company",
   workBlurb:
     "A selection of mid-century food service installations from the H. G. Rice & Company archive — the lunch counters, cafeterias, soda fountains, hotel kitchens and bars the firm designed and equipped across the Southwest. Select any photograph to enlarge it.",
-  work: Array.from({ length: 16 }, (_, i) => {
-    const n = String(i + 1).padStart(2, "0");
+  // Explicit order drives the gallery. 14 & 15 are pinned to the top;
+  // 6, 7 and 16 are dropped from the page (files remain on disk).
+  work: [14, 15, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13].map((i) => {
+    const n = String(i).padStart(2, "0");
     return {
       src: `/history/founder/work/work-${n}.webp`,
       thumb: `/history/founder/work/thumbs/work-${n}.webp`,
