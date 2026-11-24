@@ -24,7 +24,14 @@ try {
 } catch {
   /* folder not present yet → placeholder tiles below */
 }
-const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
+// 4 reserved slots render as labelled placeholders at the end of the grid —
+// drop the new scans into public/history/ (via `npm run history:build`) and
+// they replace these automatically.
+const RESERVED_SLOTS = 4;
+const archiveTiles =
+  media.length > 0
+    ? [...media, ...Array.from({ length: RESERVED_SLOTS }, () => ({ reserved: true }))]
+    : Array.from({ length: 6 });
 ---
 
 <BaseLayout
@@ -182,21 +189,50 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
       const next = reader.querySelector<HTMLButtonElement>(".fd-next");
       if (!track || !prev || !next) return;
 
-      const step = () => {
-        const slide = track.querySelector<HTMLElement>(".fd-slide");
-        const gap = parseFloat(getComputedStyle(track).columnGap || "16") || 16;
-        return slide ? slide.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
+      // Scroll to a specific page by centering it in the track. Done by exact
+      // offset (not scrollBy) so scroll-snap can't cancel the move, and only
+      // the track scrolls — never the page.
+      const slides = () => Array.from(track.querySelectorAll<HTMLElement>(".fd-slide"));
+      const currentIndex = () => {
+        const center = track.scrollLeft + track.clientWidth / 2;
+        let best = 0;
+        let bestDist = Infinity;
+        slides().forEach((s, i) => {
+          const dist = Math.abs(s.offsetLeft + s.clientWidth / 2 - center);
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = i;
+          }
+        });
+        return best;
       };
-      prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
-      next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
+      const goTo = (i: number) => {
+        const list = slides();
+        if (!list.length) return;
+        const slide = list[Math.min(list.length - 1, Math.max(0, i))];
+        const left = slide.offsetLeft - (track.clientWidth - slide.clientWidth) / 2;
+        track.scrollTo({ left, behavior: "smooth" });
+      };
+      prev.addEventListener("click", () => goTo(currentIndex() - 1));
+      next.addEventListener("click", () => goTo(currentIndex() + 1));
 
       const update = () => {
         const max = track.scrollWidth - track.clientWidth - 2;
-        prev.disabled = track.scrollLeft <= 2;
-        next.disabled = track.scrollLeft >= max;
+        const scrollable = max > 0;
+        prev.disabled = !scrollable || track.scrollLeft <= 2;
+        next.disabled = !scrollable || track.scrollLeft >= max;
       };
       track.addEventListener("scroll", update, { passive: true });
       window.addEventListener("resize", update);
+      // The page images are lazy-loaded, so the track only reaches its full
+      // width after they arrive. Re-check the arrow state on each image load
+      // (and once more shortly after) — otherwise the buttons latch disabled
+      // before the first image has sized the track, and clicks do nothing.
+      track.querySelectorAll<HTMLImageElement>("img").forEach((img) => {
+        if (!img.complete) img.addEventListener("load", update, { once: true });
+      });
+      window.addEventListener("load", update);
+      setTimeout(update, 400);
       update();
     });
 
@@ -288,6 +324,11 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
               <a class="arch" href={item.src} target="_blank" rel="noopener">
                 <img src={item.thumb} alt="FDP historical drawing" loading="lazy" />
               </a>
+            ) : item?.reserved ? (
+              <div class="arch arch-ph arch-reserved" aria-hidden="true">
+                <span class="arch-plus">+</span>
+                <span class="arch-reserved-label">Image coming</span>
+              </div>
             ) : (
               <div class="arch arch-ph" aria-hidden="true">
                 <span class="arch-mark">FDP</span>
@@ -342,7 +383,10 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
     .tl-text{color:var(--ink-soft);font-size:1rem;line-height:1.6;max-width:52ch}
 
     /* From the founder */
-    .founder{border-top:1px solid var(--line)}
+    .founder{border-top:1px solid var(--line);padding-bottom:clamp(20px,3vw,32px)}
+    /* Archive sits as a continuation of the H. G. Rice work above it, so its
+       heading + drawings pull up tight instead of starting a wide new band. */
+    .archive{padding-top:0}
     .fd-grid{display:grid;grid-template-columns:260px 1fr;gap:clamp(28px,5vw,56px);align-items:start}
     .fd-card{
       position:sticky;top:96px;
@@ -366,7 +410,7 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
     .fd-reader{position:relative}
     .fd-track{
       list-style:none;margin:0;padding:4px 2px 14px;
-      display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+      display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;
       scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent;
       overscroll-behavior-x:contain;
     }
@@ -503,6 +547,13 @@ const archiveTiles = media.length > 0 ? media : Array.from({ length: 6 });
         var(--ink-900);
     }
     .arch-mark{font-family:var(--font-display);font-weight:800;font-size:1.7rem;letter-spacing:.12em;color:rgba(255,255,255,.26)}
+    /* Reserved slots for forthcoming scans — read clearly as "to be added". */
+    .arch-reserved{
+      background:var(--steel-wash);border:1px dashed var(--line-strong);
+      grid-auto-flow:row;gap:8px;color:var(--muted);
+    }
+    .arch-plus{font-family:var(--font-display);font-weight:700;font-size:2rem;line-height:1;color:var(--line-strong)}
+    .arch-reserved-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 
     /* CTA (mirrors the homepage CTA) */
     .cta{background:var(--ink-900);color:#fff;margin-top:clamp(40px,6vw,72px)}
