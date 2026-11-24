@@ -125,25 +125,48 @@ const archiveTiles =
       <div class="fd-work">
         <h3 class="fd-work-title">{FOUNDER.workHeading}</h3>
         <p class="fd-work-blurb">{FOUNDER.workBlurb}</p>
-        <ul class="fd-work-grid fd-gallery">
-          {
-            FOUNDER.work.map((p, i) => (
-              <li class="fd-work-item">
-                <button
-                  class="fd-zoom"
-                  type="button"
-                  data-src={p.src}
-                  aria-label={`Enlarge photograph ${i + 1} of ${FOUNDER.work.length}`}
-                >
-                  <img src={p.thumb} alt={`H. G. Rice & Company built work, photograph ${i + 1}`} loading="lazy" />
-                  <span class="fd-zoom-hint" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                  </span>
-                </button>
-              </li>
-            ))
-          }
-        </ul>
+        <div class="fd-gallery">
+          {/* Feature row: the first two photos sit side-by-side across the top. */}
+          <ul class="fd-work-feature">
+            {
+              FOUNDER.work.slice(0, 2).map((p, i) => (
+                <li class="fd-work-item">
+                  <button
+                    class="fd-zoom"
+                    type="button"
+                    data-src={p.src}
+                    aria-label={`Enlarge photograph ${i + 1} of ${FOUNDER.work.length}`}
+                  >
+                    <img src={p.thumb} alt={`H. G. Rice & Company built work, photograph ${i + 1}`} loading="lazy" />
+                    <span class="fd-zoom-hint" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
+                  </button>
+                </li>
+              ))
+            }
+          </ul>
+          {/* The remaining photos flow in the masonry below. */}
+          <ul class="fd-work-grid">
+            {
+              FOUNDER.work.slice(2).map((p, i) => (
+                <li class="fd-work-item">
+                  <button
+                    class="fd-zoom"
+                    type="button"
+                    data-src={p.src}
+                    aria-label={`Enlarge photograph ${i + 3} of ${FOUNDER.work.length}`}
+                  >
+                    <img src={p.thumb} alt={`H. G. Rice & Company built work, photograph ${i + 3}`} loading="lazy" />
+                    <span class="fd-zoom-hint" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
+                  </button>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -432,6 +455,10 @@ const archiveTiles =
     .fd-work{margin-top:clamp(40px,6vw,64px);border-top:1px solid var(--line);padding-top:clamp(28px,4vw,44px)}
     .fd-work-title{font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:800;margin:0 0 8px}
     .fd-work-blurb{color:var(--ink-soft);max-width:66ch;margin:0 0 22px;font-size:1.02rem;line-height:1.6}
+    /* Feature row — the two pinned photos, side by side across the top. */
+    .fd-work-feature{list-style:none;margin:0 0 14px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+    .fd-work-feature .fd-work-item{margin:0}
+    @media (max-width:520px){.fd-work-feature{grid-template-columns:1fr}}
     .fd-work-grid{list-style:none;margin:0;padding:0;column-count:3;column-gap:14px}
     .fd-work-item{margin:0 0 14px;break-inside:avoid;-webkit-column-break-inside:avoid}
     .fd-work-item .fd-zoom{
