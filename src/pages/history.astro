@@ -7,23 +7,30 @@ import { SITE } from "../data/site";
 
 const { intro, milestones, headline } = HISTORY;
 
-// Auto-discover archive media in /public/history (scanned at build). Web-ready
-// full views + thumbnails are produced from history-originals/ by
-// `npm run history:build`; the page just lists whatever full-view JPGs exist.
+// Curated archive selection, in page order. Web-ready full views + thumbnails
+// live in public/history/ (built from history-originals/ by `npm run
+// history:build`). Only the files listed here render — edit this list to
+// add, remove, or reorder drawings. Numbers in comments are the review sheet.
 type Media = { src: string; thumb: string };
-let media: Media[] = [];
-try {
-  media = fs
-    .readdirSync(path.resolve("public/history"))
-    .filter((f) => /\.webp$/i.test(f))
-    .sort()
-    .map((f) => ({
-      src: encodeURI(`/history/${f}`),
-      thumb: encodeURI(`/history/thumbs/${f}`),
-    }));
-} catch {
-  /* folder not present yet → placeholder tiles below */
-}
+const ARCHIVE_KEEP = [
+  "20250815212645-0001a.webp", // #3
+  "20250815214047-0001a.webp", // #8
+  "20250815214220-0001a.webp", // #9
+  "hgr-archive000002.webp", // #12
+  "hgr-archive000004.webp", // #13
+  "hgr-archive000017.webp", // #26
+  "hgr-archive000020.webp", // #29
+];
+const media: Media[] = ARCHIVE_KEEP.filter((f) => {
+  try {
+    return fs.existsSync(path.resolve("public/history", f));
+  } catch {
+    return false;
+  }
+}).map((f) => ({
+  src: encodeURI(`/history/${f}`),
+  thumb: encodeURI(`/history/thumbs/${f}`),
+}));
 // 4 reserved slots render as labelled placeholders at the end of the grid —
 // drop the new scans into public/history/ (via `npm run history:build`) and
 // they replace these automatically.
