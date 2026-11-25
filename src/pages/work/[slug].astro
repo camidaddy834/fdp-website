@@ -163,7 +163,7 @@ const facts: { k: string; v: string | null }[] = [
     .cs-prose :global(strong){color:var(--ink)}
 
     .cs-gallery{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-bottom:clamp(30px,5vw,60px)}
-    .cs-gallery :global(img){width:100%;border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+    .cs-gallery :global(img){width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:var(--radius);box-shadow:var(--shadow-sm)}
 
     .cs-foot{background:var(--ink-900);color:#fff}
     .cs-foot-inner{text-align:center;padding:clamp(48px,7vw,84px) 0;display:flex;flex-direction:column;align-items:center;gap:14px}
