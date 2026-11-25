@@ -1,31 +1,33 @@
 ---
-title: "Eagle Mountain-Saginaw ISD Administration Building"
-client: "Eagle Mountain-Saginaw ISD"
-sector: "corporate"
-location: "Fort Worth, TX"
-services: ["Food Service Design", "Equipment Specification"]
-summary: "A staff café and servery at the heart of EMS ISD's new administration building — a full cook-to-order line, grab-and-go, and coffee bar wrapped in a daylit commons with indoor and terrace seating."
+title: Eagle Mountain-Saginaw ISD Administration Building
+sector: corporate
+location: Fort Worth, TX
+summary: A staff café and servery at the heart of EMS ISD's new administration building — a full cook-to-order line, grab-and-go, and coffee bar wrapped in a daylit commons with indoor and terrace seating.
+client: Eagle Mountain-Saginaw ISD
+year: null
+squareFeet: null
+seats: null
+services:
+  - Food Service Design
+  - Equipment Specification
 heroImage: ../../assets/projects/ems-admin-building.jpg
 gallery:
   - ../../assets/projects/ems-admin-building-01.jpg
   - ../../assets/projects/ems-admin-building-02.jpg
-  - ../../assets/projects/ems-admin-building-03.jpg
   - ../../assets/projects/ems-admin-building-04.jpg
   - ../../assets/projects/ems-admin-building-05.jpg
   - ../../assets/projects/ems-admin-building-06.jpg
-  - ../../assets/projects/ems-admin-building-07.jpg
   - ../../assets/projects/ems-admin-building-08.jpg
   - ../../assets/projects/ems-admin-building-09.jpg
   - ../../assets/projects/ems-admin-building-10.jpg
-  - ../../assets/projects/ems-admin-building-11.jpg
   - ../../assets/projects/ems-admin-building-12.jpg
   - ../../assets/projects/ems-admin-building-13.jpg
   - ../../assets/projects/ems-admin-building-14.jpg
-  - ../../assets/projects/ems-admin-building-15.jpg
   - ../../assets/projects/ems-admin-building-16.jpg
   - ../../assets/projects/ems-admin-building-17.jpg
 featured: true
 order: 2
+draft: false
 ---
 
 ## The challenge
