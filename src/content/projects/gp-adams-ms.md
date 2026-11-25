@@ -13,21 +13,14 @@ services:
 heroImage: ../../assets/projects/gp-adams-ms.jpg
 gallery:
   - ../../assets/projects/gp-adams-ms-01.jpg
-  - ../../assets/projects/gp-adams-ms-02.jpg
-  - ../../assets/projects/gp-adams-ms-03.jpg
-  - ../../assets/projects/gp-adams-ms-04.jpg
   - ../../assets/projects/gp-adams-ms-05.jpg
   - ../../assets/projects/gp-adams-ms-06.jpg
-  - ../../assets/projects/gp-adams-ms-07.jpg
   - ../../assets/projects/gp-adams-ms-08.jpg
-  - ../../assets/projects/gp-adams-ms-09.jpg
   - ../../assets/projects/gp-adams-ms-10.jpg
   - ../../assets/projects/gp-adams-ms-11.jpg
   - ../../assets/projects/gp-adams-ms-12.jpg
   - ../../assets/projects/gp-adams-ms-13.jpg
   - ../../assets/projects/gp-adams-ms-14.jpg
-  - ../../assets/projects/gp-adams-ms-15.jpg
-  - ../../assets/projects/gp-adams-ms-16.jpg
   - ../../assets/projects/gp-adams-ms-17.jpg
   - ../../assets/projects/gp-adams-ms-18.jpg
   - ../../assets/projects/gp-adams-ms-19.jpg
